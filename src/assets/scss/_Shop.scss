@@ -1,0 +1,65 @@
+.shop {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-areas: ". top" "sidebar main";
+    &-top {
+        min-height: 8vh;
+        text-align: left;
+        grid-area: top;
+        color: var(--dark-color);
+        &--sort {
+            min-height: inherit;
+            border: 3px solid var(--primary-color);
+            border-radius: 0.3rem;
+            input {
+                margin-right: 0.5rem;
+            }
+        }
+        &--btn {
+            text-transform: none;
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+    }
+    &-products {
+        display: flex;
+        flex-wrap: wrap;
+        grid-area: main;
+    }
+}
+
+.Shop {
+    &-card {
+        margin: 0.3rem;
+    }
+    &-side {
+        grid-area: sidebar;
+        margin-top: 1.3rem;
+        &--card {
+            position: fixed;
+            width: 15vw;
+            input {
+                margin-right: 0.5rem;
+            }
+        }
+        &--title {
+            text-align: left;
+        }
+    }
+}
+
+.card {
+    min-height: 40vh;
+    flex-grow: 1;
+    flex-basis: 30vw;
+    &__content {
+        text-align: left;
+    }
+    &__image {
+        object-fit: cover;
+    }
+}
+
+.btn-icon {
+    font-size: 1.5rem;
+}

@@ -1,0 +1,45 @@
+.header {
+    &__wrapper {
+        max-width: 90vw;
+    }
+    &__nav {
+        width: 67vw;
+    }
+    &__list {
+        min-width: 19vw;
+        &__item {
+            &:focus {
+                padding: 0.8rem 0.3rem;
+                border-width: 1px;
+            }
+        }
+    }
+    &__brand__title {
+        text-transform: none;
+        strong {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.nav {
+    &-cart {
+        min-width: 6vw;
+        &__counter {
+            position: absolute;
+            top: -2vh;
+            right: 0.2vw;
+        }
+        &__basket {
+            font-size: 1.3rem;
+        }
+        &__item {
+            align-self: center;
+        }
+    }
+}
+
+.search-bar {
+    width: 35vw;
+    min-height: 5vh;
+}
