@@ -1,0 +1,34 @@
+:root {
+    --primary-color: #272343;
+    --dark-color: #ebebeb;
+    --light-color: #ffffff;
+    // --secondary-color: #b1ecec;
+}
+
+body {
+    background-color: var(--dark-color);
+    color: var(--primary-color)
+}
+
+.btn {
+    &-secondary {
+        &:hover {
+            border: none;
+            background-color: #3e395e;
+        }
+    }
+    &-primary {
+        border: 0.5px solid var(--primary-color);
+        &:hover {
+            border: none;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+    }
+}
+
+.search-bar {
+    &__input {
+        color: var(--primary-color);
+    }
+}

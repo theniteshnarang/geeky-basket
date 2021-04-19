@@ -15,7 +15,7 @@ export const Checkout = () => {
                         })}
                         <li className="flex flex--justify_between mtb-1"><span>Shipping Charges</span><span>FREE</span></li>
                     </ul>
-                    <div className="flex flex--justify_between badge bg-blue-200 color-dark">
+                    <div className="flex flex--justify_between badge bg-blue-200 color-info">
                         <span>Total Items: {getTotalQty(cartItems)}</span>
                         <span>Total Price: ₹{getTotalPrice(cartItems)}</span>
                     </div>

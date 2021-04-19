@@ -1,33 +1,23 @@
 import { useData } from '../../context/dataContext';
 import { CartCard } from './CartCard';
 import { Checkout } from './Checkout';
-import { Link } from 'react-router-dom'
+import { EmptyPage } from '../../components/shop/EmptyPage'
 export const Cart = () => {
 
     const { cartItems } = useData()
 
     return (
-        <div className="Cart-wrapper flex flex--justify_around">
-            <div className="Cart flex flex--column">
-                <h1 className="ml-1 mt-1 Cart-title">Your Basket</h1>
+        <div className="Cart-wrapper flex flex--column flex--align_center">
+            <h1 className="Cart-title ml-3 mt-1 Cart-title">Cart</h1>
+            <div className="Cart flex flex--justify_around">
                 <div className="Cart-items">
                     {
-                        cartItems && cartItems.map(item => <CartCard key={item.id} {...item} />)
+                        cartItems.length > 0 ? cartItems.map(item => <CartCard key={item.id} {...item} />) : <EmptyPage label="Cart" />
                     }
-
                 </div>
-                {cartItems.length === 0 &&
-                    <div className="mt-3">
-                        <h1>No items in Basket</h1>
-                        <h3 className="mt-3">
-                            Please visit &nbsp;
-                            <Link to="/shop">
-                            shop page
-                            </Link>
-                        </h3>
-                    </div>}
+                {cartItems.length > 0 && <Checkout />}
             </div>
-            { cartItems.length > 0 && <Checkout />}
+
         </div>
     )
 }

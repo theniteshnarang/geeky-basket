@@ -5,10 +5,10 @@ import { ShopSide } from './ShopSide'
 const Shop = () => {
 
     return (
-        <div className="shop">   
+        <div className="Shop">
+            <ShopTop/> 
             <ShopSide/>
-            <ShopProducts />
-            <ShopTop />
+            <ShopProducts/>
         </div>
     )
 }

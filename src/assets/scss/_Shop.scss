@@ -1,12 +1,13 @@
-.shop {
+.Shop {
     display: grid;
     grid-template-columns: 1fr 5fr;
     grid-template-areas: ". top" "sidebar main";
     &-top {
-        min-height: 8vh;
+        min-height: 7.5vh;
         text-align: left;
+        margin-right: 0.5rem;
+        margin-top: 0.5rem;
         grid-area: top;
-        color: var(--dark-color);
         &--sort {
             min-height: inherit;
             border: 3px solid var(--primary-color);
@@ -25,19 +26,15 @@
         display: flex;
         flex-wrap: wrap;
         grid-area: main;
-    }
-}
-
-.Shop {
-    &-card {
-        margin: 0.3rem;
+        gap: 0.7rem 0.5rem;
+        margin: 0.5rem 0.5rem 0 0;
     }
     &-side {
         grid-area: sidebar;
-        margin-top: 1.3rem;
+        margin: 0.5rem 0.5rem 0 0.5rem;
         &--card {
             position: fixed;
-            width: 15vw;
+            width: 15.5vw;
             input {
                 margin-right: 0.5rem;
             }
@@ -51,7 +48,7 @@
 .card {
     min-height: 40vh;
     flex-grow: 1;
-    flex-basis: 30vw;
+    flex-basis: 27vw;
     &__content {
         text-align: left;
     }
@@ -62,4 +59,14 @@
 
 .btn-icon {
     font-size: 1.5rem;
+}
+
+.Empty {
+    &-link {
+        text-decoration: none;
+    }
+    &-content {
+        font-size: 2rem;
+        margin-top: 7rem;
+    }
 }

@@ -3,7 +3,7 @@ import {toggleInventory, toggleDelivery} from '../../context/actions/storeAction
 export const ShopSide = () => {
     const {storeDispatch, showInventory, showFastDelivery} = useStore()
     return (
-        <div className="Shop-side ml-1">
+        <div className="Shop-side">
             <div className="Shop-side--card card card-col flex flex--column">
                 <span className="Shop-side--title mb-1">Filters</span>
                 <div className="flex flex--align_center mb-1">

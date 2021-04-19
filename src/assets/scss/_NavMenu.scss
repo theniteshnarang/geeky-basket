@@ -1,4 +1,6 @@
 .header {
+    background-color: var(--primary-color);
+    border-bottom: 0;
     &__wrapper {
         max-width: 90vw;
     }
@@ -9,8 +11,8 @@
         min-width: 19vw;
         &__item {
             &:focus {
-                padding: 0.8rem 0.3rem;
-                border-width: 1px;
+                border: none;
+                padding: 0;
             }
         }
     }
@@ -24,11 +26,11 @@
 
 .nav {
     &-cart {
-        min-width: 6vw;
+        // min-width: 6vw;
         &__counter {
             position: absolute;
             top: -2vh;
-            right: 0.2vw;
+            right: 0.4vw;
         }
         &__basket {
             font-size: 1.3rem;

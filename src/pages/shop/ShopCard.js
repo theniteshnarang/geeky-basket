@@ -14,7 +14,9 @@ export const ShopCard = ({ id, name, price, desc, image, inStock, fastDelivery, 
             <div className="card__content flex flex--column flex--justify_around">
                 <div className="flex flex--justify_between flex--align_center">
                     <h3>{name}</h3>
-                    <button onClick={()=> toggleWish({id,name,price,desc,image})} className={`btn btn-icon bi ${isWishlisted? "bi-suit-heart-fill color-secondary": "bi-suit-heart color-primary"}`}></button>
+                    <button onClick={()=> toggleWish({id,name,price,desc,image})} className="btn btn-icon">
+                        <i className={`bi color-primary ${isWishlisted? "bi-suit-heart-fill": "bi-suit-heart"}`}></i>
+                    </button>
                 </div>
                 <p>{desc}</p>
                 <p className="flex flex--justify_between">

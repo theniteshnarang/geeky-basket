@@ -25,7 +25,7 @@ export const ShopProducts = () => {
     const sortedProducts = getSortedProducts(products, sortBy)
     const filteredProducts = getFilteredProducts(sortedProducts, {showInventory, showFastDelivery})
     return (
-    <div className="shop-products mt-1">
+    <div className="Shop-products">
         {
             filteredProducts && filteredProducts.map((product) => <ShopCard key={product.id} {...product} />)
         }
