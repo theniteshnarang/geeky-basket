@@ -46,14 +46,18 @@
 }
 
 .card {
-    min-height: 40vh;
+    max-height: 40vh;
     flex-grow: 1;
     flex-basis: 27vw;
     &__content {
         text-align: left;
+        max-width: 65%;
     }
     &__image {
         object-fit: cover;
+    }
+    &__header {
+        max-width: 35%;
     }
 }
 

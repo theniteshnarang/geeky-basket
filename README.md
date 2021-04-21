@@ -19,4 +19,3 @@ The page will reload if you make edits.\
 - Show the loading while fetching the data.
 - Add notify functionality.
 - Add Home Components
-- Component-lib: Add flex property align-left, space-between:evenly

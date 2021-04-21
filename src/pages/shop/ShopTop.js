@@ -1,7 +1,7 @@
 import {useStore} from '../../context/storeContext';
 import {sortProducts} from '../../context/actions/storeActions';
 export const ShopTop = () => {
-    const {storeDispatch} = useStore()
+    const {storeDispatch, sortBy} = useStore()
     const handleSort = (e) => {
         return storeDispatch(sortProducts(e.target.value))
     }
@@ -13,8 +13,9 @@ export const ShopTop = () => {
                     <input
                         type="radio"
                         name="sort"
-                        value="highToLow"
+                        value="popularity"
                         onChange = {(e)=> handleSort(e)}
+                        checked={sortBy === "popularity"}
                     />
                 Popularity
                 </label>
@@ -24,6 +25,7 @@ export const ShopTop = () => {
                         name="sort"
                         value="lowToHigh"
                         onChange = {(e)=> handleSort(e)}
+                        checked={sortBy === "lowToHigh"}
                     />
                 Price - Low to High
                 </label>
@@ -33,6 +35,7 @@ export const ShopTop = () => {
                         name="sort"
                         value="highToLow"
                         onChange = {(e)=> handleSort(e)}
+                        checked={sortBy === "highToLow"}
                     />
                 Price - High to Low
                 </label>
@@ -40,8 +43,9 @@ export const ShopTop = () => {
                     <input
                         type="radio"
                         name="sort"
-                        value="highToLow"
+                        value="ratings"
                         onChange = {(e)=> handleSort(e)}
+                        checked={sortBy === "ratings"}
                     />
                 Average Reviews
                 </label>

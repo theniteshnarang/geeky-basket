@@ -6,10 +6,16 @@ export const ShopProducts = () => {
     const getSortedProducts = (data, sortBy) => {
         switch(sortBy){
             case "lowToHigh":{
-                return data.sort((a,b)=> a['price'] - b['price'])
+                return data.sort((a,b)=> a['price']['mrp'] - b['price']['mrp'])
             }
             case "highToLow":{
-                return data.sort((a,b)=> b['price'] - a['price'])
+                return data.sort((a,b)=> b['price']['mrp'] - a['price']['mrp'])
+            }
+            case "popularity":{
+                return data.sort((a,b)=> b['ratings']['total']- a['ratings']['total'])
+            }
+            case "ratings":{
+                return data.sort((a,b)=> b['ratings']['avg'] - a['ratings']['avg'])
             }
             default: return data
         }
@@ -17,7 +23,7 @@ export const ShopProducts = () => {
 
     const getFilteredProducts = (data, {showInventory, showFastDelivery}) => {
         return data
-            .filter(item => showInventory === true? item : item.inStock)
+            .filter(item => showInventory === true? item : item.stock_qty > 0)
             .filter(({fastDelivery}) => showFastDelivery? fastDelivery : true)
             .filter(({name}) => searchBy.length > 0 ? name.toLowerCase().startsWith(searchBy) : true)
     }
@@ -27,7 +33,7 @@ export const ShopProducts = () => {
     return (
     <div className="Shop-products">
         {
-            filteredProducts && filteredProducts.map((product) => <ShopCard key={product.id} {...product} />)
+            filteredProducts && filteredProducts.map((product) => <ShopCard key={product._id} {...product} />)
         }
     </div>)
 }

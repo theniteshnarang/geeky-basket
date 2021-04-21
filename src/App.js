@@ -14,8 +14,8 @@ function App() {
   useEffect(()=>{
     (async function(){
         try{
-            const data = await axios.get('https://products-server.theniteshnarang.repl.co/products')
-            storeDispatch(fetchProducts(data.data))
+            const data = await axios.get('https://geeky-basket-backend.theniteshnarang.repl.co/products/')
+            storeDispatch(fetchProducts(data.data.products))
         }catch(error){
             console.log(error,'products nh mil paaye hai')
         }
