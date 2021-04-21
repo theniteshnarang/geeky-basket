@@ -14,7 +14,7 @@ export const CartCard = ({ id, name, price, desc, image, qty})=> {
             <div className="card__content flex flex--column flex--justify_around">
                 <h3>{name}</h3>
                 <p>{desc}</p>
-                <strong>Price: ₹{price.mrp}</strong>
+                <strong>Price: ₹{parseInt(price.mrp)}</strong>
                 <span className="flex flex--align_center flex--justify_around">
                     <span>Quantity:</span>
                     <button onClick = {()=> dataDispatch(increaseQty(id))} className="btn btn-icon"><i className="bi bi-plus-circle"></i></button>
