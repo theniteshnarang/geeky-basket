@@ -16,7 +16,7 @@ export const WishCard = ({ id, name, price, desc, image})=>{
                     <h3>{name}</h3>
                 </div>
                 <p>{desc}</p>
-                <span>Price: {price.mrp}</span>
+                <span>Price: {parseInt(price.mrp)}</span>
                 <div>
                     <button onClick={()=> moveToBasket({id,name,price,desc,image})} className="btn btn-secondary">Move To Basket</button>
                     <button onClick={()=> dataDispatch(removeWishItem(id))} className="ml-1 btn btn-primary">Remove</button>

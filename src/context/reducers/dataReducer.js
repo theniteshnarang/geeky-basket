@@ -38,6 +38,18 @@ const dataReducer = (initState, dispatch)=> {
             cartItems: cartItems.filter(item => item.id !== dispatch.payload)
           }
         }
+        case CART.FETCH_CARTLIST: {
+          return {
+            ...state,
+            cartItems: dispatch.payload
+          }
+        }
+        case WISH.FETCH_WISHLIST: {
+          return {
+            ...state,
+            wishItems: dispatch.payload
+          }
+        }
         case WISH.ADD_TO_WISH:{
           return {
             ...state,

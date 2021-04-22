@@ -1,10 +1,19 @@
 import {addToCart, addToWish, removeWishItem} from '../../context/actions/dataActions';
-import {useData} from '../../context/dataContext'
+import {useData} from '../../context/dataContext';
+import {useToasts} from 'react-toast-notifications'
 export const ShopCard = ({ _id:id , name, price, desc, image, stock_qty, fastDelivery}) => {
     const {dataDispatch, wishItems} = useData()
+    const {addToast} = useToasts()
     const isWishlisted = wishItems.find(item => item.id === id);
-    const toggleWish = (data) => isWishlisted? dataDispatch(removeWishItem(data.id)) : dataDispatch(addToWish(data))
-   
+    
+    const toggleWish = (data) => isWishlisted? (
+        dataDispatch(removeWishItem(data.id)),
+        addToast("Removed from wishlist", {appearance:'warning'})
+    ): (
+        dataDispatch(addToWish(data)),
+        addToast("Added to wishlist", {appearance:'success'})
+    )
+    
     
     return (
         <div key={id} className="Shop-card card flex flex--justify_around pr-1">
@@ -26,7 +35,10 @@ export const ShopCard = ({ _id:id , name, price, desc, image, stock_qty, fastDel
                 <span>Price: <strong className="color-info">₹{parseInt(price.mrp,10)}</strong> <span
                     className="card__strike color-gray-500">₹{price.mrp + price.save}</span> <span className="color-red-500">Save
                 ₹{price.save}({price.discount}%)</span></span>
-                <button onClick={()=> dataDispatch(addToCart({id,name,price,desc,image}))} className="btn btn-secondary btn-round--corner">Add To Basket</button>
+                <button onClick={()=>{
+                    dataDispatch(addToCart({id,name,price,desc,image}))
+                    addToast("Added To Basket", {appearance:'success'})
+                }} className="btn btn-secondary btn-round--corner">Add To Basket</button>
             </div>
         </div>
     )

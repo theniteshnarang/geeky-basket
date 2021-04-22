@@ -2,13 +2,13 @@
 import { ShopTop } from './ShopTop'
 import { ShopProducts } from './ShopProducts'
 import { ShopSide } from './ShopSide'
-const Shop = () => {
+const Shop = ({loading}) => {
 
     return (
         <div className="Shop">
             <ShopTop/> 
             <ShopSide/>
-            <ShopProducts/>
+            <ShopProducts loading={loading}/>
         </div>
     )
 }

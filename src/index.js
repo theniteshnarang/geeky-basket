@@ -5,14 +5,17 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { DataProvider } from './context/dataContext'
 import { StoreProvider } from './context/storeContext'
+import { ToastProvider } from 'react-toast-notifications'
 import './assets/scss/styles.css';
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider>
       <DataProvider>
-        <Router>
-          <App />
-        </Router>
+        <ToastProvider placement="bottom-left" autoDismiss={true} autoDismissTimeout={1500}>
+          <Router>
+            <App />
+          </Router>
+        </ToastProvider>
       </DataProvider>
     </StoreProvider>
   </React.StrictMode>,
