@@ -41,13 +41,13 @@ const dataReducer = (initState, dispatch)=> {
         case CART.FETCH_CARTLIST: {
           return {
             ...state,
-            cartItems: dispatch.payload
+            cartItems: dispatch.payload || []
           }
         }
         case WISH.FETCH_WISHLIST: {
           return {
             ...state,
-            wishItems: dispatch.payload
+            wishItems: dispatch.payload || []
           }
         }
         case WISH.ADD_TO_WISH:{
