@@ -6,16 +6,16 @@ export const ShopProducts = ({ loading }) => {
     const getSortedProducts = (data, sortBy) => {
         switch (sortBy) {
             case "lowToHigh": {
-                return data.sort((a, b) => a['price']['mrp'] - b['price']['mrp'])
+                return [...data].sort((a, b) => a['price']['mrp'] - b['price']['mrp'])
             }
             case "highToLow": {
-                return data.sort((a, b) => b['price']['mrp'] - a['price']['mrp'])
+                return [...data].sort((a, b) => b['price']['mrp'] - a['price']['mrp'])
             }
             case "popularity": {
-                return data.sort((a, b) => b['ratings']['total'] - a['ratings']['total'])
+                return [...data].sort((a, b) => b['ratings']['total'] - a['ratings']['total'])
             }
             case "ratings": {
-                return data.sort((a, b) => b['ratings']['avg'] - a['ratings']['avg'])
+                return [...data].sort((a, b) => b['ratings']['avg'] - a['ratings']['avg'])
             }
             default: return data
         }
@@ -31,13 +31,13 @@ export const ShopProducts = ({ loading }) => {
     const sortedProducts = getSortedProducts(products, sortBy)
     const filteredProducts = getFilteredProducts(sortedProducts, { showInventory, showFastDelivery })
     return (
-        <>  
-            {loading? (<div className="Shop-products flex flex--center"><Loader type="Circles" color="#00BFFF" height={80} width={80} /></div>)
-            : (<div className="Shop-products">
-                {  
-                    filteredProducts && filteredProducts.map((product) => <ShopCard key={product._id} {...product} />)
-                }
-            </div>)}
+        <>
+            {loading ? (<div className="Shop-products flex flex--center"><Loader type="Circles" color="#00BFFF" height={80} width={80} /></div>)
+                : (<div className="Shop-products">
+                    {
+                        filteredProducts && filteredProducts.map((product) => <ShopCard key={product._id} {...product} />)
+                    }
+                </div>)}
         </>
     )
 }

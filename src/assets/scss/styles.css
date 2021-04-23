@@ -207,6 +207,10 @@ body {
   max-width: 70%;
 }
 
+.Cart-card .badge {
+  text-align: right;
+}
+
 .Wishlist {
   max-width: 50vw;
 }
