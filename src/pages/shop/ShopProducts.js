@@ -1,7 +1,7 @@
 import { useStore } from '../../context/storeContext'
 import { ShopCard } from './ShopCard'
 import Loader from 'react-loader-spinner'
-export const ShopProducts = ({ loading }) => {
+export const ShopProducts = ({loading}) => {
     const { products, showInventory, showFastDelivery, sortBy, searchBy } = useStore()
     const getSortedProducts = (data, sortBy) => {
         switch (sortBy) {

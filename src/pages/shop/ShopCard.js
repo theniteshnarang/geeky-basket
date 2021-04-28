@@ -28,17 +28,17 @@ export const ShopCard = ({ _id: id, name, price, desc, image, stock_qty, fastDel
                     </button>
                 </div>
                 <p>{desc}</p>
-                <p className="flex flex--justify_between">
-                    <div class="rating">
-                        <span class="badge bg-secondary color-light">{ratings.avg} 
-                         &nbsp;<i class="bi bi-star-fill"></i>
+                <div className="flex flex--justify_between">
+                    <div className="rating">
+                        <span className="badge bg-secondary color-light">{ratings.avg} 
+                         &nbsp;<i className="bi bi-star-fill"></i>
                         </span>
-                        <span class="color-secondary">({ratings.total})</span>
+                        <span className="color-secondary"> ({ratings.total})</span>
                     </div>
                     {fastDelivery ? <span className="color-secondary">Fast Delivery</span> : <span className="color-secondary">Within 3-5 Days</span>}
-                </p>
-                <span>Price: <strong className="color-info">₹{parseInt(price.mrp, 10)}</strong> <span
-                    className="card__strike color-gray-500">₹{price.mrp + price.save}</span> <span className="color-red-500">Save
+                </div>
+                <span>Price: <strong>₹{parseInt(price.mrp, 10)}</strong> <span
+                    className="card__strike color-gray-500">₹{price.mrp + price.save}</span> <span className="color-secondary">Save
                 ₹{price.save}({price.discount}%)</span></span>
                 {stock_qty > 0 ? <button onClick={() => {
                     dataDispatch(addToCart({ id, name, price, desc, image }))

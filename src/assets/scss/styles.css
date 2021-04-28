@@ -148,7 +148,7 @@ body {
 }
 
 .card {
-  max-height: 40vh;
+  max-height: 43vh;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;

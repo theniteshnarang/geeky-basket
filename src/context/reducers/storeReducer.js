@@ -4,11 +4,12 @@ import {STORE} from '../actionGroup'
 
 export const storeReducer = (initState, dispatch)=>{
     const state = initState;
+
     switch(dispatch.type){
         case STORE.FETCH_PRODUCTS : {
             return {
                 ...state,
-                products: [...dispatch.payload]
+                products: [...dispatch.payload ]
             } 
         }
         case STORE.SORT_PRODUCTS : {
