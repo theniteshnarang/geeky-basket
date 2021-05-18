@@ -5,46 +5,42 @@ import { Wishlist } from './pages/wishlist/Wishlist';
 import { Cart } from './pages/cart/Cart'
 import { Routes, Route } from 'react-router-dom';
 import { useData } from './context/dataContext'
-import { fetchCartData, fetchWishData } from './context/actions/dataActions'
+import { fetchCartData, fetchWishData} from './context/actions/dataActions'
 import { useEffect } from 'react';
 import { useStore } from './context/storeContext';
 import { fetchProducts } from './context/actions/storeActions';
 import { useAxios } from './useAxios'
 function App() {
-  const { cartItems, wishItems, dataDispatch } = useData()
+  const { dataDispatch } = useData()
   const { storeDispatch } = useStore();
   const { loading, data } = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/products')
-
-
+  const { data: cartData} = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/cart')
+  const { data: wishData} = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/wish')
   useEffect(() => {
     if (data) {
       storeDispatch(fetchProducts(data.products))
     }
   }, [data, storeDispatch])
 
+  useEffect(()=>{
+    if(cartData){
+      dataDispatch(fetchCartData(cartData.cartItems))
+    }
+  },[cartData, dataDispatch])
 
-  useEffect(() => {
-    cartItems.length > 0 && localStorage.setItem('cartItems', JSON.stringify(cartItems))
-  }, [cartItems])
-  useEffect(() => {
-    wishItems.length > 0 && localStorage.setItem('wishItems', JSON.stringify(wishItems))
-  }, [wishItems])
-
-
-  useEffect(() => {
-    const cartList = localStorage.getItem('cartItems')
-    const wishList = localStorage.getItem('wishItems')
-    dataDispatch(fetchCartData(cartList))
-    dataDispatch(fetchWishData(wishList))
-  }, [dataDispatch])
-
+  useEffect(()=>{
+    if(wishData){
+      dataDispatch(fetchWishData(wishData.wishItems))
+    }
+  },[wishData, dataDispatch])
+ 
   return (
     <div className="App">
       <NavMenu />
       <div className="mt-4">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop loading={loading} />} />
+          <Route path="/products" element={<Shop loading={loading} />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
         </Routes>

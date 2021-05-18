@@ -1,11 +1,12 @@
 .header {
     background-color: var(--primary-color);
     border-bottom: 0;
+    font-weight: 500;
     &__wrapper {
         max-width: 90vw;
     }
     &__nav {
-        width: 67vw;
+        width: 55vw;
     }
     &__list {
         min-width: 19vw;
@@ -18,6 +19,8 @@
     }
     &__brand__title {
         text-transform: none;
+        margin-left: 0.2rem;
+        font-weight: 600;
         strong {
             font-size: 1.5rem;
         }
@@ -26,7 +29,6 @@
 
 .nav {
     &-cart {
-        // min-width: 6vw;
         &__counter {
             position: absolute;
             top: -2vh;
@@ -41,7 +43,8 @@
     }
 }
 
-.search-bar {
-    width: 35vw;
-    min-height: 5vh;
+.navigation {
+    &__account {
+        width: 12vw;
+    }
 }

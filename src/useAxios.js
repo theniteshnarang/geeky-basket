@@ -10,9 +10,7 @@ const useAxios = (requestType, url, postObject) => {
                 const response = await axios({
                     method: requestType,
                     url,
-                    data: {
-                        serverList: postObject
-                    }
+                    data: postObject
                 })
                 setData((prev) => ({ ...prev, data: response.data, status: response.status }))
             } catch (err) {

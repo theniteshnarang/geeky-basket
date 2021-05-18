@@ -15,7 +15,4 @@ The page will reload if you make edits.\
 
 ## Task to do on E-Comm Library:
 
-- if data is not loaded on shop, show the page to refresh 4-5 times.
-- Show the loading while fetching the data.
-- Add notify functionality.
-- Add Home Components
+In card_image : do object fit = cover. current is contain

@@ -1,19 +1,19 @@
 .Shop {
     display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-template-areas: ". top" "sidebar main";
+    grid-template-columns: 1fr 4.5fr;
+    grid-template-areas: "search top" "sidebar main";
     &-top {
         min-height: 7.5vh;
         text-align: left;
-        margin-right: 0.5rem;
-        margin-top: 0.5rem;
+        margin: 0.4rem 1.5rem 0 0.5rem;
         grid-area: top;
         &--sort {
             min-height: inherit;
-            border: 3px solid var(--primary-color);
+            border: 2px solid var(--primary-color);
             border-radius: 0.3rem;
             input {
                 margin-right: 0.5rem;
+                background-color: var(--secondary-color);
             }
         }
         &--btn {
@@ -22,20 +22,29 @@
             line-height: 1;
         }
     }
+    &-card {
+        max-width: 39vw;
+        @include bigtab {
+            min-width: 100%;
+        }
+    }
+    &-search {
+        grid-area: search;
+    }
     &-products {
         display: flex;
         flex-wrap: wrap;
         grid-area: main;
-        min-height: 80vh;
-        gap: 0.7rem 0.5rem;
-        margin: 0.5rem 0.5rem 0 0;
+        grid-gap: 0.5rem;
+        margin: 0.5rem 0.5rem 0 0.5rem;
     }
     &-side {
         grid-area: sidebar;
         margin: 0.5rem 0.5rem 0 0.5rem;
         &--card {
             position: fixed;
-            width: 15.5vw;
+            width: 17vw;
+            padding: 0.7rem;
             input {
                 margin-right: 0.5rem;
             }
@@ -43,22 +52,6 @@
         &--title {
             text-align: left;
         }
-    }
-}
-
-.card {
-    max-height: 43vh;
-    flex-grow: 1;
-    flex-basis: 27vw;
-    &__content {
-        text-align: left;
-        max-width: 65%;
-    }
-    &__image {
-        object-fit: cover;
-    }
-    &__header {
-        max-width: 35%;
     }
 }
 

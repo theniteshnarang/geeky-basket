@@ -12,7 +12,7 @@ export const Cart = () => {
             <div className="Cart flex flex--justify_around">
                 <div className="Cart-items">
                     {
-                        cartItems.length > 0 ? cartItems.map(item => <CartCard key={item.id} {...item} />) : <EmptyPage label="Cart" />
+                        cartItems.length > 0 ? cartItems.map(item => <CartCard key={item._id} {...item} />) : <EmptyPage label="Cart" />
                     }
                 </div>
                 {cartItems.length > 0 && <Checkout />}

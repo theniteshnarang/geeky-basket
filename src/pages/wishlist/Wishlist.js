@@ -8,7 +8,7 @@ export const Wishlist = () => {
             <h1 className="Wishlist-title ml-3 mt-1">Wishlist</h1>
             <div className="Wishlist flex flex--column flex--center">
                 {
-                    wishItems.length > 0 ? wishItems.map(item => <WishCard key={item.id} {...item} />) : <EmptyPage label="Wishlist" />
+                    wishItems.length > 0 ? wishItems.map(item => <WishCard key={item._id} {...item} />) : <EmptyPage label="Wishlist" />
                 }
             </div>
         </div>

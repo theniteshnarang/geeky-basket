@@ -1,13 +1,18 @@
 :root {
     --primary-color: #272343;
-    --dark-color: #ebebeb;
+    --dark-color: #efefef;
     --light-color: #ffffff;
-    // --secondary-color: #b1ecec;
+}
+
+*,
+*:before,
+*:after {
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
     background-color: var(--dark-color);
-    color: var(--primary-color)
+    color: var(--primary-color);
 }
 
 .btn {
@@ -27,8 +32,39 @@ body {
     }
 }
 
+.cursor-disable {
+    cursor: not-allowed !important;
+}
+
 .search-bar {
+    width: 17vw;
+    margin: 0.5rem;
+    margin-top: 1rem;
+    min-height: 5vh;
+    position: fixed;
     &__input {
         color: var(--primary-color);
+        font-size: 1rem;
+        border-width: 2px;
+    }
+    &__icon {
+        top: 0.4rem;
+    }
+}
+
+.avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.card {
+    text-align: left;
+    &__content {
+        max-width: 66%;
+        padding-left: 0.5rem;
+    }
+    &__header {
+        max-width: 34%;
+        height: 42vh;
     }
 }

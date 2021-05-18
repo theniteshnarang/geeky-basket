@@ -1,29 +1,22 @@
 import { Link } from 'react-router-dom';
-import {useData} from '../../context/dataContext';
-import {useStore} from '../../context/storeContext';
-import {getTotalQty} from '../../helpers/utils';
-import {searchStore} from '../../context/actions/storeActions'
+import { useData } from '../../context/dataContext';
+// import logo from '../../assets/logo/gblogo.svg';
+import { getTotalQty } from '../../helpers/utils';
 export const NavMenu = () => {
-    const {cartItems} = useData();
-    const {storeDispatch} = useStore();
+    const { cartItems } = useData();
     return (
         <>
             <div className="header">
                 <div className="header__wrapper flex flex--justify_between flex--align_center">
                     <Link to="/" className="header__brand flex flex--align_center">
-                        <img className="header__brand__logo" src={process.env.PUBLIC_URL + "/assets/img/logo.svg"} alt="logo" />
-                        <span className="header__brand__title ">GEEKY BAS<strong className="color-secondary">K8</strong> </span>
+                        {/* <img src={logo} alt="" /> */}
+                        {/* <img className="header__brand__logo" src={process.env.PUBLIC_URL + "/assets/img/logo.svg"} alt="logo" /> */}
+                        <span className="header__brand__title ">Geeky Basket</span>
                     </Link>
                     <nav className="navigation header__nav flex flex--justify_between flex--align_center">
-                        <div className="search-bar pos-rel">
-                            <input className="search-bar__input" type="text" name="search"
-                                onChange = {(e) => storeDispatch(searchStore(e.target.value))}
-                                placeholder="Search for products" />
-                            <i className="search-bar__icon bi bi-search"></i>
-                        </div>
                         <ul className="nav header__list flex flex--justify_between flex--align_center">
                             <li><Link className="header__list__item" to="/">Home</Link></li>
-                            <li><Link className="header__list__item" to="/shop">Shop</Link></li>
+                            <li><Link className="header__list__item" to="/products">Shop</Link></li>
                             {/* <li><Link className="header__list__item" to="/login">Login</Link></li> */}
                             <li><Link className="nav-cart header__list__item" to="/wishlist">
                                 <i className="bi bi-suit-heart-fill nav-cart__basket"></i>
@@ -34,7 +27,17 @@ export const NavMenu = () => {
                                     <i className="bi bi-basket nav-cart__basket"></i>
                                 </div>
                             </Link></li>
+
+                        </ul>
+                        <ul className="navigation__account flex flex--justify_around flex--align_center color-light flex flex--align_center">
                             
+                            <li>Hello, Sign in</li>
+                            <li>
+                                <img className="avatar"
+                                    src="https://images.unsplash.com/photo-1598463166228-c0f90d180918?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=453&q=80"
+
+                                    alt="avatar-img" />
+                            </li>
                         </ul>
                     </nav>
                 </div>

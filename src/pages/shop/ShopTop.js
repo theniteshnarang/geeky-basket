@@ -1,7 +1,7 @@
-import {useStore} from '../../context/storeContext';
-import {sortProducts} from '../../context/actions/storeActions';
+import { useStore } from '../../context/storeContext';
+import { sortProducts } from '../../context/actions/storeActions';
 export const ShopTop = () => {
-    const {storeDispatch, sortBy} = useStore()
+    const { storeDispatch, sortBy } = useStore()
     const handleSort = (e) => {
         return storeDispatch(sortProducts(e.target.value))
     }
@@ -14,7 +14,7 @@ export const ShopTop = () => {
                         type="radio"
                         name="sort"
                         value="popularity"
-                        onChange = {(e)=> handleSort(e)}
+                        onChange={(e) => handleSort(e)}
                         checked={sortBy === "popularity"}
                     />
                 Popularity
@@ -24,7 +24,7 @@ export const ShopTop = () => {
                         type="radio"
                         name="sort"
                         value="lowToHigh"
-                        onChange = {(e)=> handleSort(e)}
+                        onChange={(e) => handleSort(e)}
                         checked={sortBy === "lowToHigh"}
                     />
                 Price - Low to High
@@ -34,7 +34,7 @@ export const ShopTop = () => {
                         type="radio"
                         name="sort"
                         value="highToLow"
-                        onChange = {(e)=> handleSort(e)}
+                        onChange={(e) => handleSort(e)}
                         checked={sortBy === "highToLow"}
                     />
                 Price - High to Low
@@ -44,13 +44,13 @@ export const ShopTop = () => {
                         type="radio"
                         name="sort"
                         value="ratings"
-                        onChange = {(e)=> handleSort(e)}
+                        onChange={(e) => handleSort(e)}
                         checked={sortBy === "ratings"}
                     />
                 Average Reviews
                 </label>
             </fieldset>
-            
+
         </div>
     )
 }

@@ -1,42 +1,42 @@
 import { CART, WISH } from '../actionGroup';
-
+// import { v4 as uuid} from 'uuid'
 const addToCart = (data) => ({
     type: CART.ADD_TO_CART,
-    payload: { ...data , qty:1}
+    payload: { _id: data._id, qty:1, product: data}
 })
 
 const increaseQty = (data) => ({
     type: CART.INCREASE_QTY,
-    payload: data
+    payload: {id:data}
 })
 
 const fetchCartData = (data) => ({
     type: CART.FETCH_CARTLIST,
-    payload: JSON.parse(data)
+    payload: { cartItems: data}
 })
 
 const fetchWishData = (data) => ({
     type: WISH.FETCH_WISHLIST,
-    payload:JSON.parse(data)
+    payload:data
 })
 const decreaseQty = (data) => ({
     type: CART.DECREASE_QTY,
-    payload: data
+    payload: {id:data}
 })
 
 const removeItem = (data) =>({
     type: CART.REMOVE_ITEM,
-    payload: data
+    payload: {id: data}
 })
 
 const addToWish = (data) => ({
     type: WISH.ADD_TO_WISH,
-    payload: { ...data }
+    payload: { _id: data._id, product: data}
 })
 
 const removeWishItem = (data) => ({
     type: WISH.REMOVE_WISH_ITEM,
-    payload:data
+    payload: {id: data}
 })
 
 export {addToCart, increaseQty, decreaseQty, removeItem, addToWish, removeWishItem, fetchCartData, fetchWishData}
