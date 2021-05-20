@@ -12,6 +12,12 @@ export const storeReducer = (initState, dispatch)=>{
                 products: [...dispatch.payload ]
             } 
         }
+        case STORE.FETCH_CATEGORY:{
+            return {
+                ...state,
+                category: [...dispatch.payload]
+            }
+        }
         case STORE.SORT_PRODUCTS : {
             return {
                 ...state,

@@ -71,6 +71,50 @@ body {
   height: 42vh;
 }
 
+.Banner {
+  height: 50vh;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.Category {
+  text-align: left;
+}
+
+.Category__title {
+  font-size: 1.7rem;
+}
+
+.Category-name {
+  font-size: 1rem;
+}
+
+.Category-card {
+  width: 17vw;
+  height: 52vh;
+}
+
+.Category-card__header {
+  min-height: 32vh;
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.Category-card__content {
+  margin: 0.5rem 0;
+  font-size: 0.8rem;
+  min-height: 18vh;
+}
+
+.Category-price {
+  font-size: 1.1rem;
+}
+
+.Category-container {
+  width: 80%;
+  margin: 1rem auto;
+}
+
 .header {
   background-color: var(--primary-color);
   border-bottom: 0;

@@ -6,7 +6,7 @@ export const EmptyPage = ({ label }) => {
             <p className="Empty-content">
                 Please do some
                 <span>
-                    <Link className="Empty-link color-secondary" to="/shop"> shopping.
+                    <Link className="Empty-link color-secondary" to="/products"> shopping.
                 </Link>
                 </span>
             </p>

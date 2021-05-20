@@ -4,6 +4,10 @@ const fetchProducts = (data) => ({
     payload: data
 })
 
+const fetchCategory = (data) => ({
+    type: STORE.FETCH_CATEGORY,
+    payload:data
+})
 
 const sortProducts = (data) => ({
     type: STORE.SORT_PRODUCTS,
@@ -22,4 +26,5 @@ const searchStore = (data) => ({
     type: STORE.SEARCH_STORE,
     payload: data.toLowerCase()
 })
-export {fetchProducts, sortProducts, toggleInventory, toggleDelivery, searchStore}
+
+export {fetchProducts, sortProducts, toggleInventory, toggleDelivery, searchStore, fetchCategory}

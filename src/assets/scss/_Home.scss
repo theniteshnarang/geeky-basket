@@ -1,0 +1,35 @@
+.Banner {
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.Category {
+    text-align: left;
+    &__title {
+        font-size: 1.7rem;
+    }
+    &-name {
+        font-size: 1rem;
+    }
+    &-card {
+        width: 17vw;
+        height: 52vh;
+        &__header {
+            min-height: 32vh;
+            border-bottom: 1px solid var(--gray-300);
+        }
+        &__content {
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+            min-height: 18vh;
+        }
+    }
+    &-price {
+        font-size: 1.1rem;
+    }
+    &-container {
+        width: 80%;
+        margin: 1rem auto;
+    }
+}
