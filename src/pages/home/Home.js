@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { useStore } from '../../context/storeContext'
 
 const CategoryCard = ({_id:productId, name,image,desc, price}) => {
     return (
-        <div key={productId} class="Category-card card card--col flex flex--column">
-            <div class="Category-card__header card__header--col pos-rel flex flex--column">
-                <img class="card__image" src={image[0]} alt="card-image" />
-                {/* <i class="card__icon card__icon--col bi bi-heart-fill color-primary"></i> */}
+        <div key={productId} className="Category-card card card--col flex flex--column">
+            <div className="Category-card__header card__header--col pos-rel flex flex--column">
+                <img className="card__image" src={image[0]} alt="book cover"/>
+                {/* <i className="card__icon card__icon--col bi bi-heart-fill color-primary"></i> */}
             </div>
-            <div class="Category-card__content card__content--col flex flex--column flex--justify_around">
+            <div className="Category-card__content card__content--col flex flex--column flex--justify_around">
                 <h3 className="Category-name">{name}</h3>
                 <span className="Category-price color-secondary">Price: ₹{parseInt(price.mrp)}</span>
-                {/* <button class="btn btn-secondary color-light btn-round--corner">Add To Cart</button> */}
+                {/* <button className="btn btn-secondary color-light btn-round--corner">Add To Cart</button> */}
             </div>
         </div>
     )
@@ -23,7 +23,7 @@ const Category = ({ name, _id: categId, products }) => {
         <div className="Category">
             <h3 className="Category__title mtb-1">{name}</h3>
             <div className="Category__content flex flex--justify_around">
-                {products.slice(0,4).map(item => <CategoryCard {...item}/>)}
+                {products.slice(0,4).map(item => <CategoryCard key={item._id} {...item}/>)}
             </div>
         </div>
     )
@@ -37,7 +37,7 @@ const Home = ({ loading }) => {
                 {loading ?
                     <h1>Loading...</h1> :
                     <div className="Category-container pb-1">
-                        {category.map(item => <Category {...item} />)}
+                        {category.map(item => <Category key={item._id} {...item} />)}
                     </div>
                 }
             </div>
