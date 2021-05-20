@@ -6,6 +6,8 @@
 
 .Category {
     text-align: left;
+    position: relative;
+    border-bottom: 1px solid var(--gray-300);
     &__title {
         font-size: 1.7rem;
     }
@@ -24,6 +26,11 @@
             font-size: 0.8rem;
             min-height: 18vh;
         }
+    }
+    &__cta {
+        position: absolute;
+        top: 0;
+        right: 0;
     }
     &-price {
         font-size: 1.1rem;

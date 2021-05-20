@@ -1,16 +1,31 @@
 import {increaseQty, decreaseQty, removeItem, addToWish} from '../../context/actions/dataActions'
 import {useData} from '../../context/dataContext'
 import {useToasts} from 'react-toast-notifications'
+import {useState} from 'react'
 import axios from 'axios'
 export const CartCard = ({ _id: cartId, product, qty})=> {
     const { _id: productId, desc, image,name,price} = product
     const {dataDispatch} = useData()
     const {addToast} = useToasts()
-    
-    const moveToWish = (data) => {
-        dataDispatch(addToWish(data))
-        dataDispatch(removeItem(data.id))
-        addToast('Moved To Wishlist',{appearance:'success'})
+    const [loading, setLoading] = useState(false)
+    const moveToWish = async (data) => {
+        try{
+            setLoading(loading => true)
+            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish`,{
+                _id: data._id,
+                product: data._id
+            })
+            if(postWish.status === 201){
+                removeProduct(data._id)
+                dataDispatch(addToWish(data))
+                return addToast('Moved To Wishlist',{appearance:'success'})
+            }   
+        }catch(error){
+            console.log('error occured while moving to wish', error)
+            addToast("Product is already in wishlist", { appearance: 'error' })
+        }finally{
+            setLoading(loading => false)
+        }
     }
 
     const increaseQuantity = async(id, quantity) => {
@@ -55,8 +70,9 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
         }catch (error){
             console.log('error occured while decreasing quantity', error)
         }
-        // return qty === 1 ? dataDispatch(removeItem(id)) : dataDispatch(decreaseQty(id))
     }
+
+    const moveToWishText = (loading) => loading ? "Moving..." : "Move To Wishlist";
 
     return (
         <div key={cartId} className="card Cart-card flex flex--justify_around pr-1 m-1">
@@ -81,9 +97,9 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
                         <i className="bi bi-dash-circle"></i>
                     </button>
                     <button
-                        onClick = {()=> moveToWish({productId,name, price, desc,image})}
-                        className="btn btn-secondary">
-                            Move to wishlist
+                        onClick = {()=> moveToWish(product)}
+                        className={`btn btn-secondary ${loading && 'cursor-disable'}`}>
+                        {moveToWishText(loading)}
                     </button>
                     <button onClick = {()=> removeProduct(productId)} className="btn btn-primary">Remove</button>
                 </span>

@@ -20,11 +20,12 @@ const CategoryCard = ({_id:productId, name,image,desc, price}) => {
 const Category = ({ name, _id: categId, products }) => {
 
     return (
-        <div className="Category">
+        <div className="Category pb-1">
             <h3 className="Category__title mtb-1">{name}</h3>
             <div className="Category__content flex flex--justify_around">
                 {products.slice(0,4).map(item => <CategoryCard key={item._id} {...item}/>)}
             </div>
+            <button className="Category__cta btn btn-primary">Show More</button>
         </div>
     )
 }
