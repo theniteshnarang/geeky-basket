@@ -7,10 +7,10 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
     const { _id: productId, desc, image,name,price} = product
     const {dataDispatch} = useData()
     const {addToast} = useToasts()
-    const [loading, setLoading] = useState(false)
+    const [cartLoad, setCartLoad] = useState(false)
     const moveToWish = async (data) => {
         try{
-            setLoading(loading => true)
+            setCartLoad(cartLoad => true)
             const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish`,{
                 _id: data._id,
                 product: data._id
@@ -24,12 +24,13 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
             console.log('error occured while moving to wish', error)
             addToast("Product is already in wishlist", { appearance: 'error' })
         }finally{
-            setLoading(loading => false)
+            setCartLoad(cartLoad => false)
         }
     }
 
     const increaseQuantity = async(id, quantity) => {
         try {
+            setCartLoad(loading => true)
             const incQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${id}`,{
                 qty: quantity + 1
             })
@@ -39,11 +40,14 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
             }
         }catch (error){
             console.log('error occured while increasing quantity', error)
+        }finally{
+            setCartLoad(loading => false)
         }
     }
 
     const removeProduct = async(id) => {
         try {
+            setCartLoad(loading => true)
             const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${id}`)
             console.log({remove})
             if(remove.status === 200){
@@ -52,6 +56,8 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
             }
         }catch (error){
             console.log('error occured while removing product', error)
+        }finally{
+            setCartLoad(loading => false)
         }  
     }
 
@@ -60,6 +66,7 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
             return removeProduct(id)
         }
         try {
+            setCartLoad(loading => true)
             const decQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${id}`,{
                 qty: quantity - 1
             })
@@ -69,10 +76,12 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
             }
         }catch (error){
             console.log('error occured while decreasing quantity', error)
+        }finally{
+            setCartLoad(loading => false)
         }
     }
 
-    const moveToWishText = (loading) => loading ? "Moving..." : "Move To Wishlist";
+    const moveToWishText = (cartLoad) => cartLoad ? "Loading..." : "Move To Wishlist";
 
     return (
         <div key={cartId} className="card Cart-card flex flex--justify_around pr-1 m-1">
@@ -83,26 +92,34 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
                 <h3>{name}</h3>
                 <p>{desc}</p>
                 <strong>Price: ₹{parseInt(price.mrp)}</strong>
-                <span className="flex flex--align_center flex--justify_around">
+                <div className="flex flex--align_center flex--justify_around">
                     <span>Quantity:</span>
                     <button
+                        disabled={cartLoad}
                         onClick = {() =>increaseQuantity(productId, qty)}
-                        className="btn btn-icon">
+                        className={`btn btn-icon ${cartLoad && 'cursor-disable'}`}>
                         <i className="bi bi-plus-circle"></i>
                     </button>
                     {qty}
                     <button
+                        disabled={cartLoad}
                         onClick = {()=> decreaseQuantity(productId, qty)}
-                        className="btn btn-icon">
+                        className={`btn btn-icon ${cartLoad && 'cursor-disable'}`}>
                         <i className="bi bi-dash-circle"></i>
                     </button>
                     <button
+                        disabled={cartLoad}
                         onClick = {()=> moveToWish(product)}
-                        className={`btn btn-secondary ${loading && 'cursor-disable'}`}>
-                        {moveToWishText(loading)}
+                        className={`btn btn-secondary ${cartLoad && 'cursor-disable'}`}>
+                        {moveToWishText(cartLoad)}
                     </button>
-                    <button onClick = {()=> removeProduct(productId)} className="btn btn-primary">Remove</button>
-                </span>
+                    <button
+                        disabled={cartLoad}
+                        onClick = {()=> removeProduct(productId)}
+                        className={`btn btn-primary ${cartLoad && 'cursor-disable'}`}>
+                        Remove
+                    </button>
+                </div>
              
                 <strong className="badge color-info bg-blue-200">Subtotal: ₹{parseInt(price.mrp,10)*qty}</strong>
               

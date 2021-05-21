@@ -44,6 +44,7 @@ export const WishCard = ({ _id:wishId, product})=>{
 
     const handleRemove = async (id) => {
         try{
+            setLoading(loading => true)
             const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/${id}`)
             console.log({remove})
             if(remove.status === 200){
@@ -53,9 +54,11 @@ export const WishCard = ({ _id:wishId, product})=>{
         }catch(error){
             console.log('error occured while removing wish item', error)
             return addToast("Please try to remove again", { appearance: 'error' })
+        }finally{
+            setLoading(loading => false)
         }
     }
-    const moveToBasketText = (loading) => loading? "Moving..." : "Move To Basket";
+    const moveToBasketText = (loading) => loading? "Loading..." : "Move To Basket";
     
     return (
         <div key={wishId} className="card Wishlist-card flex flex--justify_around pr-1">
@@ -69,8 +72,18 @@ export const WishCard = ({ _id:wishId, product})=>{
                 <p>{desc}</p>
                 <span>Price: {parseInt(price.mrp)}</span>
                 <div>
-                    <button onClick={()=> moveToBasket(product, cartItems)} className={`btn btn-secondary ${loading && 'cursor-disable'}`}>{moveToBasketText(loading)}</button>
-                    <button onClick={()=> handleRemove(productId)} className="ml-1 btn btn-primary">Remove</button>
+                    <button
+                        disabled={loading}
+                        onClick={()=> moveToBasket(product, cartItems)}
+                        className={`btn btn-secondary ${loading && 'cursor-disable'}`}>
+                        {moveToBasketText(loading)}
+                    </button>
+                    <button
+                        disabled={loading}
+                        onClick={()=> handleRemove(productId)}
+                        className={`ml-1 btn btn-primary ${loading && 'cursor-disable'}`}>
+                        Remove
+                    </button>
                 </div>
                 
             </div>

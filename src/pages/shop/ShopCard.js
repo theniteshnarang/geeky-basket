@@ -7,42 +7,47 @@ import { useState } from 'react'
 export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, fastDelivery, ratings }) => {
     const { dataDispatch, wishItems, cartItems } = useData()
     const { addToast } = useToasts()
-    const [loading, setLoading] = useState(false)
+    const [cartLoad, setCartLoad] = useState(false)
+    const [wishLoad, setWishLoad] = useState(false)
     const isWishlisted = wishItems.find(item => item._id === productId);
 
     const handleWish = async (data, isWishlisted) => {
-        if (isWishlisted) {
-            try{
+        try {
+            setWishLoad(loading => true)
+            if (isWishlisted) {
                 const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/${data._id}`)
-                if(remove.status === 200){
+                if (remove.status === 200) {
                     dataDispatch(removeWishItem(data._id))
                     return addToast("Removed from wishlist", { appearance: 'warning' })
                 }
-            }catch(error){
-                console.log('error occured while removing wish item', error)
-                return addToast("Please try to remove again", { appearance: 'error' })
             }
-        }
-        try{
-            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish`,{
+            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish`, {
                 _id: data._id,
                 product: data._id
             })
-            if(postWish.status === 201){
+            if (postWish.status === 201) {
                 dataDispatch(addToWish(data))
                 return addToast("Added to wishlist", { appearance: 'success' })
-            }    
-        }catch(error){
-            console.log('error occured while posting wish', error)
-            addToast("Please Add to Wish again", { appearance: 'error' })
+            }
+        } catch (error) {
+            console.log('error occured while adding or removing wish item', error)
+            return addToast("Please try again", { appearance: 'error' })
+        } finally {
+            setWishLoad(loading => false)
         }
+        // try {
+            
+        // } catch (error) {
+        //     console.log('error occured while posting wish', error)
+        //     addToast("Please Add to Wish again", { appearance: 'error' })
+        // }
     }
 
     const handleCart = async (data, cartItems) => {
         const cartItem = cartItems.find(item => item._id === productId)
 
         try {
-            setLoading(loading => true)
+            setCartLoad(loading => true)
             if (cartItem === undefined) {
                 const postedData = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/cart', {
                     _id: productId,
@@ -67,11 +72,11 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
             console.log('error occured while posting data', error)
             addToast("Please Try Again", { appearance: 'error' })
         } finally {
-            setLoading(loading => false)
+            setCartLoad(loading => false)
         }
     }
     function getButtonStatus() {
-        return stock_qty > 0 ? (loading ? "Adding..." : "Add To Basket") : ("Out of Stock")
+        return stock_qty > 0 ? (cartLoad ? "Adding..." : "Add To Basket") : ("Out of Stock")
     }
 
     function isFastDelivery() {
@@ -87,7 +92,7 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
                 <div className="flex flex--justify_between flex--align_center">
                     <h3>{name}</h3>
                     <button onClick={() => handleWish({ _id: productId, name, price, desc, image }, isWishlisted)} className="btn btn-icon">
-                        <i className={`bi color-primary ${isWishlisted ? "bi-suit-heart-fill" : "bi-suit-heart"}`}></i>
+                        <i className={`btn-icon bi color-primary ${wishLoad && 'cursor-disable'} ${isWishlisted ? "bi-suit-heart-fill" : "bi-suit-heart"}`}></i>
                     </button>
                 </div>
                 <p>{desc}</p>
@@ -109,8 +114,8 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
                 </span>
 
                 <button
-                    disabled={loading || stock_qty === 0}
-                    className={`btn btn-round--corner ${loading || stock_qty === 0 ? "bg-blue-200 color-primary cursor-disable" : "btn-secondary"}`}
+                    disabled={cartLoad || stock_qty === 0}
+                    className={`btn btn-round--corner ${cartLoad || stock_qty === 0 ? "bg-blue-200 color-primary cursor-disable" : "btn-secondary"}`}
                     onClick={() => handleCart({ _id: productId, name, price, desc, image }, cartItems)}
                 >
                     {getButtonStatus()}

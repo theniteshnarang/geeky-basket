@@ -235,7 +235,7 @@ body {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: main;
-  grid-gap: 0.5rem;
+  grid-gap: 1rem;
   margin: 0.5rem 0.5rem 0 0.5rem;
 }
 
@@ -264,13 +264,22 @@ body {
   font-size: 1.5rem;
 }
 
+.Empty {
+  height: 80vh;
+  width: 80vw;
+}
+
 .Empty-link {
   text-decoration: none;
 }
 
-.Empty-content {
+.Empty-card {
+  max-width: 100%;
+  min-height: 100%;
+}
+
+.Empty-text {
   font-size: 2rem;
-  margin-top: 7rem;
 }
 
 .Cart {

@@ -35,7 +35,7 @@
         display: flex;
         flex-wrap: wrap;
         grid-area: main;
-        grid-gap: 0.5rem;
+        grid-gap: 1rem;
         margin: 0.5rem 0.5rem 0 0.5rem;
     }
     &-side {
@@ -60,11 +60,16 @@
 }
 
 .Empty {
+    height: 80vh;
+    width: 80vw;
     &-link {
         text-decoration: none;
     }
-    &-content {
+    &-card {
+        max-width: 100%;
+        min-height: 100%;
+    }
+    &-text {
         font-size: 2rem;
-        margin-top: 7rem;
     }
 }
