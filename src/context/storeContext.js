@@ -9,7 +9,7 @@ const StoreProvider = ({children}) => {
             products:[],
             category:[],
             genreItems:[],
-            showInventory: false,
+            showInventory: true,
             showFastDelivery: false,
             sortBy: 'popularity',
             searchBy:""
