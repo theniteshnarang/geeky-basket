@@ -88,28 +88,29 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
             <div className="card__header flex flex--justify_center">
                 <img className="card__image" src={image[0]} alt="" />
             </div>
-            <div className="card__content flex flex--column flex--justify_around">
+            <div className="Shop-content card__content flex flex--column flex--justify_around">
                 <div className="flex flex--justify_between flex--align_center">
-                    <h3>{name}</h3>
+                    <h3 className="Shop-content__title">{name}</h3>
                     <button onClick={() => handleWish({ _id: productId, name, price, desc, image }, isWishlisted)} className="btn btn-icon">
                         <i className={`btn-icon bi color-primary ${wishLoad && 'cursor-disable'} ${isWishlisted ? "bi-suit-heart-fill" : "bi-suit-heart"}`}></i>
                     </button>
                 </div>
-                <p>{desc}</p>
-                <div className="flex flex--justify_between">
+                <p className="Shop-content__desc">{desc}</p>
+                <div className="Shop-content__ratings flex flex--justify_between">
                     <div className="rating">
-                        <span className="badge bg-secondary color-light">
+                        <span className="badge bg-primary color-light">
                             {ratings.avg}&nbsp;<i className="bi bi-star-fill"></i>
                         </span>
-                        <span className="color-secondary"> ({ratings.total})</span>
+                        &nbsp;
+                        <span>({ratings.total})</span>
                     </div>
-                    <span className="color-secondary">
+                    <span>
                         {isFastDelivery()}
                     </span>
                 </div>
 
-                <span>Price: <strong>₹{parseInt(price.mrp, 10)}</strong>
-                    <span className="card__strike color-gray-500">₹{price.mrp + price.save}</span>
+                <span className="Shop-content__price">Price: <strong>₹{parseInt(price.mrp, 10)}</strong>&nbsp;
+                    <span className="card__strike color-gray-500">₹{price.mrp + price.save}</span>&nbsp;
                     <span className="color-secondary">Save ₹{price.save}({price.discount}%)</span>
                 </span>
 

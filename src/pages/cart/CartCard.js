@@ -16,8 +16,8 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
                 product: data._id
             })
             if(postWish.status === 201){
-                removeProduct(data._id)
                 dataDispatch(addToWish(data))
+                removeProduct(data._id)
                 return addToast('Moved To Wishlist',{appearance:'success'})
             }   
         }catch(error){
@@ -51,8 +51,8 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
             const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${id}`)
             console.log({remove})
             if(remove.status === 200){
+                dataDispatch(removeItem(id))
                 addToast('Item Removed',{appearance:'warning'})
-                return dataDispatch(removeItem(id))
             }
         }catch (error){
             console.log('error occured while removing product', error)
@@ -110,7 +110,7 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
                     <button
                         disabled={cartLoad}
                         onClick = {()=> moveToWish(product)}
-                        className={`btn btn-secondary ${cartLoad && 'cursor-disable'}`}>
+                        className={`btn ${cartLoad ? 'bg-blue-200 color-primary cursor-disable' : 'btn-secondary'}`}>
                         {moveToWishText(cartLoad)}
                     </button>
                     <button

@@ -22,8 +22,14 @@
             line-height: 1;
         }
     }
+    &-content {
+        font-size: 0.9rem;
+        &__price {
+            font-size: 1rem;
+        }
+    }
     &-card {
-        max-width: 39vw;
+        max-width: 38vw;
         @include bigtab {
             min-width: 100%;
         }
@@ -35,15 +41,15 @@
         display: flex;
         flex-wrap: wrap;
         grid-area: main;
-        grid-gap: 1rem;
-        margin: 0.5rem 0.5rem 0 0.5rem;
+        grid-gap: 1.5rem;
+        margin: 1.2rem 0.5rem 0 0.7rem;
     }
     &-side {
         grid-area: sidebar;
-        margin: 0.5rem 0.5rem 0 0.5rem;
+        margin: 1.2rem 0.5rem 0 0.5rem;
         &--card {
             position: fixed;
-            width: 17vw;
+            width: 16.5vw;
             padding: 0.7rem;
             input {
                 margin-right: 0.5rem;
@@ -72,4 +78,9 @@
     &-text {
         font-size: 2rem;
     }
+}
+
+.badge {
+    padding: 0.3rem 0.5rem;
+    font-size: 1rem;
 }

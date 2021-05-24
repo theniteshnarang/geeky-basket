@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useStore } from '../../context/storeContext'
 
 const CategoryCard = ({_id:productId, name,image,desc, price}) => {
@@ -25,7 +25,9 @@ const Category = ({ name, _id: categId, products }) => {
             <div className="Category__content flex flex--justify_around">
                 {products.slice(0,4).map(item => <CategoryCard key={item._id} {...item}/>)}
             </div>
-            <button className="Category__cta btn btn-primary">Show More</button>
+            <Link to="#">
+                <button className="Category__cta btn btn-primary">Show More</button>
+            </Link>
         </div>
     )
 }

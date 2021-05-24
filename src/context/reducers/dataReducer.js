@@ -1,7 +1,7 @@
 import {CART, WISH} from '../actionGroup'
 
 const reduceCart = (acc, val) => {
-    const findEle = acc.find((item) => item._id === val._id); // What val is doing here?
+    const findEle = acc.find((item) => item._id === val._id); // val is initial object from acc array
     if (findEle === undefined) {
       return acc.concat(val);
     }

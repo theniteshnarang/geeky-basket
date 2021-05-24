@@ -4,7 +4,7 @@ import {STORE} from '../actionGroup'
 
 export const storeReducer = (initState, dispatch)=>{
     const state = initState;
-
+    const genreItems = state.genreItems;
     switch(dispatch.type){
         case STORE.FETCH_PRODUCTS : {
             return {
@@ -17,6 +17,19 @@ export const storeReducer = (initState, dispatch)=>{
                 ...state,
                 category: [...dispatch.payload]
             }
+        }
+        case STORE.FILTER_GENRE: {
+            if(genreItems.includes(dispatch.payload.name)){
+                return {
+                    ...state,
+                    genreItems : genreItems.filter(item => item !== dispatch.payload.name)
+                }
+            }
+            return {
+                ...state,
+                genreItems: genreItems.concat(dispatch.payload.name)
+            }
+            
         }
         case STORE.SORT_PRODUCTS : {
             return {

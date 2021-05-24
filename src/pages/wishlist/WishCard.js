@@ -75,7 +75,7 @@ export const WishCard = ({ _id:wishId, product})=>{
                     <button
                         disabled={loading}
                         onClick={()=> moveToBasket(product, cartItems)}
-                        className={`btn btn-secondary ${loading && 'cursor-disable'}`}>
+                        className={`btn ${loading ? 'bg-blue-200 color-primary cursor-disable' : 'btn-secondary'}`}>
                         {moveToBasketText(loading)}
                     </button>
                     <button
