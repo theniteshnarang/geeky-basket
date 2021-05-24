@@ -14,6 +14,10 @@ const filterGenre = (data) => ({
     payload: data
 })
 
+const clearGenre = () => ({
+    type: STORE.CLEAR_GENRE
+})
+
 const sortProducts = (data) => ({
     type: STORE.SORT_PRODUCTS,
     payload: data
@@ -32,4 +36,4 @@ const searchStore = (data) => ({
     payload: data.toLowerCase()
 })
 
-export {fetchProducts, sortProducts, toggleInventory, toggleDelivery, searchStore, fetchCategory, filterGenre }
+export {fetchProducts, sortProducts, toggleInventory, toggleDelivery, searchStore, fetchCategory, filterGenre, clearGenre}

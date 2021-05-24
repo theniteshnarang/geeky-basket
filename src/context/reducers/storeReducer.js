@@ -31,6 +31,12 @@ export const storeReducer = (initState, dispatch)=>{
             }
             
         }
+        case STORE.CLEAR_GENRE : {
+            return {
+                ...state,
+                genreItems: []
+            }
+        }
         case STORE.SORT_PRODUCTS : {
             return {
                 ...state,

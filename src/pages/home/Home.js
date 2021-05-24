@@ -1,6 +1,7 @@
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useStore } from '../../context/storeContext'
-
+import {useEffect} from 'react'
+import  {filterGenre, clearGenre} from '../../context/actions/storeActions'
 const CategoryCard = ({_id:productId, name,image,desc, price}) => {
     return (
         <div key={productId} className="Category-card card card--col flex flex--column">
@@ -18,19 +19,24 @@ const CategoryCard = ({_id:productId, name,image,desc, price}) => {
 }
 
 const Category = ({ name, _id: categId, products }) => {
-
+    const {storeDispatch} = useStore()
     return (
         <div className="Category pb-1">
             <h3 className="Category__title mtb-1">{name}</h3>
             <div className="Category__content flex flex--justify_around">
                 {products.slice(0,4).map(item => <CategoryCard key={item._id} {...item}/>)}
             </div>
-            <button className="Category__cta btn btn-primary">Show More</button>
+            <Link to="/products">
+                <button className="Category__cta btn btn-primary" onClick={()=> storeDispatch(filterGenre({name}))}>Show More</button>
+            </Link>
         </div>
     )
 }
 const Home = ({ loading }) => {
-    const { category } = useStore()
+    const { category, storeDispatch } = useStore()
+    useEffect(() => {
+        storeDispatch(clearGenre())
+    }, [storeDispatch])
     return (
         <>
             <div>
