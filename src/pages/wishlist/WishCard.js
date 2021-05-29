@@ -13,19 +13,19 @@ export const WishCard = ({ _id:wishId, product})=>{
         try {
             setLoading(loading => true)
             if (cartItem === undefined) {
-                const postedData = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/cart', {
-                    _id: productId,
-                    qty: 1,
-                    product: productId
+                const postedData = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237', {
+                    cartlist: {
+                        _id: productId,
+                        product: productId
+                    }
                 })
-                console.log({ postedData })
                 if (postedData.status === 201) {
                     handleRemove(productId)
                     dataDispatch(addToCart(data))
                     return addToast("Moved To Basket", { appearance: 'success' })
                 }
             }
-            const updatedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${cartItem._id}`, {
+            const updatedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${cartItem._id}`, {
                 qty: cartItem.qty + 1
             })
             console.log({ updatedData })
@@ -45,7 +45,7 @@ export const WishCard = ({ _id:wishId, product})=>{
     const handleRemove = async (id) => {
         try{
             setLoading(loading => true)
-            const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/${id}`)
+            const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237/${id}`)
             console.log({remove})
             if(remove.status === 200){
                 dataDispatch(removeWishItem(id))
@@ -61,7 +61,7 @@ export const WishCard = ({ _id:wishId, product})=>{
     const moveToBasketText = (loading) => loading? "Loading..." : "Move To Basket";
     
     return (
-        <div key={wishId} className="card Wishlist-card flex flex--justify_around pr-1">
+        <div key={productId} className="card Wishlist-card flex flex--justify_around pr-1">
             <div className="card__header flex flex--justify_center">
                 <img className="card__image" src={image[0]} alt=""/>
             </div>

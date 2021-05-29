@@ -11,9 +11,11 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
     const moveToWish = async (data) => {
         try{
             setCartLoad(cartLoad => true)
-            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish`,{
-                _id: data._id,
-                product: data._id
+            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237`,{
+                wishlist : {
+                    _id: data._id,
+                    product: data._id
+                }
             })
             if(postWish.status === 201){
                 dataDispatch(addToWish(data))
@@ -31,10 +33,9 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
     const increaseQuantity = async(id, quantity) => {
         try {
             setCartLoad(loading => true)
-            const incQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${id}`,{
+            const incQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${id}`,{
                 qty: quantity + 1
             })
-            console.log({incQty})
             if(incQty.status === 201){
                 return dataDispatch(increaseQty(id))
             }
@@ -48,8 +49,7 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
     const removeProduct = async(id) => {
         try {
             setCartLoad(loading => true)
-            const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${id}`)
-            console.log({remove})
+            const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${id}`)
             if(remove.status === 200){
                 dataDispatch(removeItem(id))
                 addToast('Item Removed',{appearance:'warning'})
@@ -67,10 +67,9 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
         }
         try {
             setCartLoad(loading => true)
-            const decQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${id}`,{
+            const decQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${id}`,{
                 qty: quantity - 1
             })
-            console.log({decQty})
             if(decQty.status === 201){
                 return dataDispatch(decreaseQty(id))
             }

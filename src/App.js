@@ -13,10 +13,10 @@ import { useAxios } from './useAxios'
 function App() {
   const { dataDispatch } = useData()
   const { storeDispatch } = useStore();
-  const { loading:productsLoading, data:productsData } = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/products')
+  const { loading:productsLoading, data:productsData } = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/product')
   const { loading:categoryLoading, data:categoryData } = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/category')
-  const { data: cartData} = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/cart')
-  const { data: wishData} = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/wish')
+  const { data: cartData} = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237')
+  const { data: wishData} = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237')
   
   useEffect(() => {
     if(categoryData && productsData){
@@ -27,8 +27,9 @@ function App() {
 
   useEffect(()=>{
     if(cartData && wishData){
-      dataDispatch(fetchCartData(cartData.cartItems))
-      dataDispatch(fetchWishData(wishData.wishItems))
+      console.log({wishData})
+      dataDispatch(fetchCartData(cartData.cartItem.cartlist))
+      dataDispatch(fetchWishData(wishData.wishItem.wishlist))
     }
   },[cartData, wishData, dataDispatch])
 

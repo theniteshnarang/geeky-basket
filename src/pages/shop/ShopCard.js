@@ -15,15 +15,17 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
         try {
             setWishLoad(loading => true)
             if (isWishlisted) {
-                const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/${data._id}`)
+                const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237/${data._id}`)
                 if (remove.status === 200) {
                     dataDispatch(removeWishItem(data._id))
                     return addToast("Removed from wishlist", { appearance: 'warning' })
                 }
             }
-            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish`, {
-                _id: data._id,
-                product: data._id
+            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237`, {
+                wishlist : {
+                    _id: data._id,
+                    product: data._id
+                }
             })
             if (postWish.status === 201) {
                 dataDispatch(addToWish(data))
@@ -35,12 +37,6 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
         } finally {
             setWishLoad(loading => false)
         }
-        // try {
-            
-        // } catch (error) {
-        //     console.log('error occured while posting wish', error)
-        //     addToast("Please Add to Wish again", { appearance: 'error' })
-        // }
     }
 
     const handleCart = async (data, cartItems) => {
@@ -49,10 +45,11 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
         try {
             setCartLoad(loading => true)
             if (cartItem === undefined) {
-                const postedData = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/cart', {
-                    _id: productId,
-                    qty: 1,
-                    product: productId
+                const postedData = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237', {
+                    cartlist: {
+                        _id: productId,
+                        product: productId
+                    }
                 })
                 console.log({ postedData })
                 if (postedData.status === 201) {
@@ -60,7 +57,7 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
                     return dataDispatch(addToCart(data))
                 }
             }
-            const updatedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${cartItem._id}`, {
+            const updatedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${cartItem._id}`, {
                 qty: cartItem.qty + 1
             })
             console.log({ updatedData })
