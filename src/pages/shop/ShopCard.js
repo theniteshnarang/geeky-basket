@@ -94,7 +94,7 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
                 <div className="flex flex--justify_between flex--align_center">
                     <h3 className="Shop-content__title">{name}</h3>
                     <button onClick={() => handleWish({ _id: productId, name, price, desc, image }, isWishlisted)} className="btn btn-icon">
-                        <i className={`btn-icon bi color-primary ${wishLoad || token===null && 'cursor-disable'} ${isWishlisted ? "bi-suit-heart-fill" : "bi-suit-heart"}`}></i>
+                        <i className={`btn-icon bi color-primary ${(wishLoad || token===null || token===undefined) && 'cursor-disable'} ${isWishlisted ? "bi-suit-heart-fill" : "bi-suit-heart"}`}></i>
                     </button>
                 </div>
                 <p className="Shop-content__desc">{desc}</p>
@@ -118,7 +118,7 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
 
                 <button
                     disabled={cartLoad || stock_qty === 0}
-                    className={`btn btn-round--corner ${cartLoad || stock_qty === 0 || token === null? "bg-blue-200 color-primary cursor-disable" : "btn-secondary"}`}
+                    className={`btn btn-round--corner ${cartLoad || stock_qty === 0 || token === null || token === undefined? "bg-blue-200 color-primary cursor-disable" : "btn-secondary"}`}
                     onClick={() => handleCart({ _id: productId, name, price, desc, image }, cartItems)}
                 >
                     {getButtonStatus(token)}
