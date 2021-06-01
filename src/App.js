@@ -1,22 +1,35 @@
 import { NavMenu } from './components/header/NavMenu';
 import Home from './pages/home/Home'
 import Shop from './pages/shop/Shop';
+import {NotFound} from './pages/NotFound'
+import {LoginRegister} from './pages/account/LoginRegister'
 import { Wishlist } from './pages/wishlist/Wishlist';
 import { Cart } from './pages/cart/Cart'
-import { Routes, Route } from 'react-router-dom';
-import { useData } from './context/dataContext'
+import {Login } from './pages/account/Login'
+import {SignUp} from './pages/account/SignUp';
+import { Routes, Route, Navigate} from 'react-router-dom';
+import { useData } from './context/dataProvider'
+import {useAuth} from './context/authProvider'
 import { fetchCartData, fetchWishData} from './context/actions/dataActions'
 import { useEffect } from 'react';
-import { useStore } from './context/storeContext';
+import { useStore } from './context/storeProvider';
 import { fetchProducts, fetchCategory } from './context/actions/storeActions';
 import { useAxios } from './useAxios'
 function App() {
   const { dataDispatch } = useData()
   const { storeDispatch } = useStore();
+  const {user,setUser, token} = useAuth()
   const { loading:productsLoading, data:productsData } = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/product')
   const { loading:categoryLoading, data:categoryData } = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/category')
-  const { data: cartData} = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237')
-  const { data: wishData} = useAxios('get', 'https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237')
+  const {data: userData} = useAxios('get', `https://geeky-basket-backend.theniteshnarang.repl.co/user/${user?._id}`)
+  const { data: cartData} = useAxios('get', `https://geeky-basket-backend.theniteshnarang.repl.co/cart/${user?._id}`)
+  const { data: wishData} = useAxios('get', `https://geeky-basket-backend.theniteshnarang.repl.co/wish/${user?._id}`)
+
+  useEffect(()=>{
+    if(userData){
+      setUser(userData.user)
+    }
+  },[userData,setUser])
   
   useEffect(() => {
     if(categoryData && productsData){
@@ -33,6 +46,10 @@ function App() {
     }
   },[cartData, wishData, dataDispatch])
 
+  function PrivateRoute ({token, ...props}){
+    return token ? <Route {...props} /> : <Navigate to="/login-register/login" replace={true}/>
+  }
+
  
   return (
     <div className="App">
@@ -41,8 +58,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home loading={categoryLoading}/>} />
           <Route path="/products" element={<Shop loading={productsLoading} />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/wishlist" element={<Wishlist />} />
+          <PrivateRoute token={token} path="/cart" element={<Cart />} />
+          <PrivateRoute token={token} path="/wishlist" element={<Wishlist />} />
+          <Route path="login-register" element={<LoginRegister/>}>
+            <Route path="login" element={<Login/>}/>
+            <Route path="sign-up" element={<SignUp/>}/>
+          </Route>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>
     </div>

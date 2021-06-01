@@ -1,4 +1,4 @@
-import { useStore } from '../../context/storeContext';
+import { useStore } from '../../context/storeProvider';
 import { sortProducts } from '../../context/actions/storeActions';
 export const ShopTop = () => {
     const { storeDispatch, sortBy } = useStore()

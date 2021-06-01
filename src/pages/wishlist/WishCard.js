@@ -1,10 +1,12 @@
-import {useData} from '../../context/dataContext';
+import {useData} from '../../context/dataProvider';
 import {addToCart, removeWishItem} from '../../context/actions/dataActions'
-import {useToasts} from 'react-toast-notifications'
+import {useToasts} from 'react-toast-notifications';
+import {useAuth} from '../../context/authProvider'
 import axios from 'axios'
 import {useState} from 'react'
 export const WishCard = ({ _id:wishId, product})=>{
     const {dataDispatch, cartItems} = useData()
+    const {user} = useAuth()
     const {addToast} = useToasts();
     const [loading, setLoading] = useState(false)
     const {_id:productId,desc, image, name, price} = product;
@@ -13,7 +15,7 @@ export const WishCard = ({ _id:wishId, product})=>{
         try {
             setLoading(loading => true)
             if (cartItem === undefined) {
-                const postedData = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237', {
+                const postedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${user._id}`, {
                     cartlist: {
                         _id: productId,
                         product: productId
@@ -25,7 +27,7 @@ export const WishCard = ({ _id:wishId, product})=>{
                     return addToast("Moved To Basket", { appearance: 'success' })
                 }
             }
-            const updatedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${cartItem._id}`, {
+            const updatedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${user._id}/${cartItem._id}`, {
                 qty: cartItem.qty + 1
             })
             console.log({ updatedData })
@@ -45,7 +47,7 @@ export const WishCard = ({ _id:wishId, product})=>{
     const handleRemove = async (id) => {
         try{
             setLoading(loading => true)
-            const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237/${id}`)
+            const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/${user._id}/${id}`)
             console.log({remove})
             if(remove.status === 200){
                 dataDispatch(removeWishItem(id))

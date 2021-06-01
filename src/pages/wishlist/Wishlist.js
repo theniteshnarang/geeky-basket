@@ -1,4 +1,4 @@
-import { useData } from '../../context/dataContext';
+import { useData } from '../../context/dataProvider';
 import { WishCard } from './WishCard'
 import { EmptyPage } from '../../components/shop/EmptyPage'
 export const Wishlist = () => {

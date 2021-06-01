@@ -1,4 +1,4 @@
-import { useData } from '../../context/dataContext';
+import { useData } from '../../context/dataProvider';
 import { CartCard } from './CartCard';
 import { Checkout } from './Checkout';
 import { EmptyPage } from '../../components/shop/EmptyPage'

@@ -1,10 +1,13 @@
-import { CART, WISH } from '../actionGroup';
+import { CART, WISH, CLEAR_DATA} from '../actionGroup';
 // import { v4 as uuid} from 'uuid'
 const addToCart = (data) => ({
     type: CART.ADD_TO_CART,
     payload: { _id: data._id, qty:1, product: data}
 })
 
+const clearData = () => ({
+    type: CLEAR_DATA
+})
 const increaseQty = (data) => ({
     type: CART.INCREASE_QTY,
     payload: {id:data}
@@ -39,4 +42,4 @@ const removeWishItem = (data) => ({
     payload: {id: data}
 })
 
-export {addToCart, increaseQty, decreaseQty, removeItem, addToWish, removeWishItem, fetchCartData, fetchWishData}
+export {addToCart, increaseQty, decreaseQty, removeItem, addToWish, removeWishItem, fetchCartData, fetchWishData, clearData}

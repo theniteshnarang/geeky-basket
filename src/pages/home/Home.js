@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useStore } from '../../context/storeContext'
+import { useStore } from '../../context/storeProvider'
 import {useEffect} from 'react'
 import  {filterGenre, clearGenre} from '../../context/actions/storeActions'
 const CategoryCard = ({_id:productId, name,image,desc, price}) => {

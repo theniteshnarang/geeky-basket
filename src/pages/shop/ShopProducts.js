@@ -1,4 +1,4 @@
-import { useStore } from '../../context/storeContext'
+import { useStore } from '../../context/storeProvider'
 import { ShopCard } from './ShopCard'
 import Loader from 'react-loader-spinner'
 export const ShopProducts = ({loading}) => {

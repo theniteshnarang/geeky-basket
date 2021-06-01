@@ -1,0 +1,44 @@
+.NotFound {
+    height: 100vh;
+    font-size: 5rem;
+}
+
+.SignUp,
+.Login {
+    height: 100vh;
+    &-card {
+        height: 60%;
+        width: 30%;
+        transform: translateY(-15%);
+    }
+    &-badge {
+        width: 90%;
+        text-align: center;
+    }
+    &-form {
+        width: 90%;
+        height: 80%;
+    }
+}
+
+.Login {
+    height: 90vh;
+}
+
+.hide {
+    display: none;
+}
+
+.NavLogin {
+    width: 30%;
+    transform: translateY(100%);
+    font-size: 2rem;
+    height: 7vh;
+    &-item {
+        transform: translateY(-15%);
+    }
+}
+
+.input-container {
+    min-width: 100%;
+}

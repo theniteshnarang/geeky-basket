@@ -1,4 +1,4 @@
-import { useStore } from '../../context/storeContext'
+import { useStore } from '../../context/storeProvider'
 import { toggleInventory, toggleDelivery, filterGenre} from '../../context/actions/storeActions'
 const FilterCard = ({_id:genreId,name}) => {
     const {storeDispatch, genreItems}=useStore()

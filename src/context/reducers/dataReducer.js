@@ -1,4 +1,4 @@
-import {CART, WISH} from '../actionGroup'
+import {CART, WISH, CLEAR_DATA} from '../actionGroup'
 
 const reduceCart = (acc, val) => {
     const findEle = acc.find((item) => item._id === val._id); // val is initial object from acc array
@@ -44,6 +44,12 @@ const dataReducer = (initState, dispatch)=> {
             cartItems: dispatch.payload.cartItems || []
           }
         }
+        case CART.EMPTY_CART : {
+          return {
+            ...state,
+            cartItems: []
+          }
+        }
         case WISH.FETCH_WISHLIST: {
           return {
             ...state,
@@ -60,6 +66,19 @@ const dataReducer = (initState, dispatch)=> {
           return {
             ...state,
             wishItems: wishItems.filter(item => item._id !== dispatch.payload.id)
+          }
+        }
+        case WISH.EMPTY_WISH :{
+          return {
+            ...state,
+            wishItems: []
+          }
+        }
+        case CLEAR_DATA : {
+          return {
+            ...state,
+            cartItems : [],
+            wishItems : []
           }
         }
         default:

@@ -1,5 +1,5 @@
 import { getTotalQty, getTotalPrice } from '../../helpers/utils'
-import { useData } from '../../context/dataContext'
+import { useData } from '../../context/dataProvider'
 export const Checkout = () => {
     const { cartItems } = useData()
     return (

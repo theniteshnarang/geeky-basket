@@ -1,17 +1,19 @@
 import {increaseQty, decreaseQty, removeItem, addToWish} from '../../context/actions/dataActions'
-import {useData} from '../../context/dataContext'
+import {useData} from '../../context/dataProvider'
 import {useToasts} from 'react-toast-notifications'
+import {useAuth} from '../../context/authProvider'
 import {useState} from 'react'
 import axios from 'axios'
 export const CartCard = ({ _id: cartId, product, qty})=> {
     const { _id: productId, desc, image,name,price} = product
     const {dataDispatch} = useData()
+    const {user} = useAuth()
     const {addToast} = useToasts()
     const [cartLoad, setCartLoad] = useState(false)
     const moveToWish = async (data) => {
         try{
             setCartLoad(cartLoad => true)
-            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237`,{
+            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/${user._id}`,{
                 wishlist : {
                     _id: data._id,
                     product: data._id
@@ -33,7 +35,7 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
     const increaseQuantity = async(id, quantity) => {
         try {
             setCartLoad(loading => true)
-            const incQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${id}`,{
+            const incQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${user._id}/${id}`,{
                 qty: quantity + 1
             })
             if(incQty.status === 201){
@@ -49,7 +51,7 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
     const removeProduct = async(id) => {
         try {
             setCartLoad(loading => true)
-            const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${id}`)
+            const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${user._id}/${id}`)
             if(remove.status === 200){
                 dataDispatch(removeItem(id))
                 addToast('Item Removed',{appearance:'warning'})
@@ -67,7 +69,7 @@ export const CartCard = ({ _id: cartId, product, qty})=> {
         }
         try {
             setCartLoad(loading => true)
-            const decQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${id}`,{
+            const decQty = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${user._id}/${id}`,{
                 qty: quantity - 1
             })
             if(decQty.status === 201){

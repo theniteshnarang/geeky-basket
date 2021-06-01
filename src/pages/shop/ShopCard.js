@@ -1,5 +1,6 @@
 import { addToCart, addToWish, removeWishItem } from '../../context/actions/dataActions';
-import { useData } from '../../context/dataContext';
+import { useData } from '../../context/dataProvider';
+import {useAuth} from '../../context/authProvider'
 import { useToasts } from 'react-toast-notifications';
 import axios from 'axios';
 import { useState } from 'react'
@@ -7,6 +8,7 @@ import { useState } from 'react'
 export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, fastDelivery, ratings }) => {
     const { dataDispatch, wishItems, cartItems } = useData()
     const { addToast } = useToasts()
+    const {user, token} = useAuth()
     const [cartLoad, setCartLoad] = useState(false)
     const [wishLoad, setWishLoad] = useState(false)
     const isWishlisted = wishItems.find(item => item._id === productId);
@@ -15,13 +17,13 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
         try {
             setWishLoad(loading => true)
             if (isWishlisted) {
-                const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237/${data._id}`)
+                const remove = await axios.delete(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/${user._id}/${data._id}`)
                 if (remove.status === 200) {
                     dataDispatch(removeWishItem(data._id))
                     return addToast("Removed from wishlist", { appearance: 'warning' })
                 }
             }
-            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/60af2497674b50016f37c237`, {
+            const postWish = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/wish/${user._id}`, {
                 wishlist : {
                     _id: data._id,
                     product: data._id
@@ -45,7 +47,7 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
         try {
             setCartLoad(loading => true)
             if (cartItem === undefined) {
-                const postedData = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237', {
+                const postedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${user._id}`, {
                     cartlist: {
                         _id: productId,
                         product: productId
@@ -57,7 +59,7 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
                     return dataDispatch(addToCart(data))
                 }
             }
-            const updatedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/60af2497674b50016f37c237/${cartItem._id}`, {
+            const updatedData = await axios.post(`https://geeky-basket-backend.theniteshnarang.repl.co/cart/${user._id}/${cartItem._id}`, {
                 qty: cartItem.qty + 1
             })
             console.log({ updatedData })
@@ -72,7 +74,10 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
             setCartLoad(loading => false)
         }
     }
-    function getButtonStatus() {
+    function getButtonStatus(token) {
+        if(!token){
+            return "Please Login"
+        }
         return stock_qty > 0 ? (cartLoad ? "Adding..." : "Add To Basket") : ("Out of Stock")
     }
 
@@ -89,7 +94,7 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
                 <div className="flex flex--justify_between flex--align_center">
                     <h3 className="Shop-content__title">{name}</h3>
                     <button onClick={() => handleWish({ _id: productId, name, price, desc, image }, isWishlisted)} className="btn btn-icon">
-                        <i className={`btn-icon bi color-primary ${wishLoad && 'cursor-disable'} ${isWishlisted ? "bi-suit-heart-fill" : "bi-suit-heart"}`}></i>
+                        <i className={`btn-icon bi color-primary ${wishLoad || token===null && 'cursor-disable'} ${isWishlisted ? "bi-suit-heart-fill" : "bi-suit-heart"}`}></i>
                     </button>
                 </div>
                 <p className="Shop-content__desc">{desc}</p>
@@ -113,10 +118,10 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
 
                 <button
                     disabled={cartLoad || stock_qty === 0}
-                    className={`btn btn-round--corner ${cartLoad || stock_qty === 0 ? "bg-blue-200 color-primary cursor-disable" : "btn-secondary"}`}
+                    className={`btn btn-round--corner ${cartLoad || stock_qty === 0 || token === null? "bg-blue-200 color-primary cursor-disable" : "btn-secondary"}`}
                     onClick={() => handleCart({ _id: productId, name, price, desc, image }, cartItems)}
                 >
-                    {getButtonStatus()}
+                    {getButtonStatus(token)}
                 </button>
 
             </div>

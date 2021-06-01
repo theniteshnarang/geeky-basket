@@ -173,7 +173,7 @@ body {
 }
 
 .navigation__account {
-  width: 12vw;
+  width: 14vw;
 }
 
 .Shop {
@@ -374,5 +374,60 @@ body {
   border: 1px solid var(--primary-color);
   border-left: 0;
   border-right: 0;
+}
+
+.NotFound {
+  height: 100vh;
+  font-size: 5rem;
+}
+
+.SignUp,
+.Login {
+  height: 100vh;
+}
+
+.SignUp-card,
+.Login-card {
+  height: 60%;
+  width: 30%;
+  -webkit-transform: translateY(-15%);
+          transform: translateY(-15%);
+}
+
+.SignUp-badge,
+.Login-badge {
+  width: 90%;
+  text-align: center;
+}
+
+.SignUp-form,
+.Login-form {
+  width: 90%;
+  height: 80%;
+}
+
+.Login {
+  height: 90vh;
+}
+
+.hide {
+  display: none;
+}
+
+.NavLogin {
+  width: 30%;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  font-size: 2rem;
+  height: 7vh;
+}
+
+.NavLogin-item {
+  -webkit-transform: translateY(-15%);
+          transform: translateY(-15%);
+}
+
+.input-container {
+  min-width: 100%;
 }
 /*# sourceMappingURL=styles.css.map */

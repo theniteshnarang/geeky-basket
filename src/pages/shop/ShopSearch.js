@@ -1,6 +1,6 @@
 import React from 'react'
 import { searchStore } from '../../context/actions/storeActions';
-import { useStore } from '../../context/storeContext';
+import { useStore } from '../../context/storeProvider';
 export function ShopSearch() {
     const { storeDispatch } = useStore();
     return (
