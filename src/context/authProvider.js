@@ -1,104 +1,115 @@
-import {createContext, useContext, useState, useEffect} from 'react'
-import {useNavigate} from 'react-router-dom'
-import {useData} from '../context/dataProvider'
-import {clearData} from '../context/actions/dataActions'
-import axios from 'axios'
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { clearData } from './actions/dataActions';
+import { useData } from './dataProvider';
+
 const AuthContext = createContext()
 
-const AuthProvider = ({children}) => {
-    const [user, setUser] = useState({_id:JSON.parse(localStorage.getItem('login'))?.['_id']})
-    const [error, setError] = useState({})
+function setupAuthHeaderForServiceCalls(token) {
+    if (token) {
+        return (axios.defaults.headers.common["Authorization"] = token);
+    }
+    delete axios.defaults.headers.common["Authorization"];
+}
+
+
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null)
     const [token, setToken] = useState(JSON.parse(localStorage.getItem('login'))?.['token'])
     const navigate = useNavigate()
-    const {dataDispatch} = useData()
+    const { dataDispatch, getCartData, getWishData } = useData()
 
-    function setupAuthHeaderForServiceCalls(token) {
-        if (token) {
-          return (axios.defaults.headers.common["Authorization"] = token);
-        }
-        delete axios.defaults.headers.common["Authorization"];
-    }
-
-    useEffect(()=>{
-        setupAuthHeaderForServiceCalls(token)
-    },[token])
-
-    const initiateWish = async (id) => {
-        try{
-            const response = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/wish', {
-                user: id,
-                _id: id,
-                wishlist: []
-            })
-            console.log({response})
-        }catch(error){
-            console.log({error},'...error while initating wish')
+    const getUser = async () => {
+        try {
+            const response = await axios.get(`${global.config.url}user/u`)
+            if (response.status === 200) {
+                setUser(response.data.user)
+            }
+        } catch (error) {
+            console.log("Error while getting the user data", error.response)
         }
     }
 
-    const initiateCart = async (id) => {
-        try{
-            const response = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/cart', {
-                user: id,
-                _id: id,
-                cartlist: []
-            })
-            console.log({response})
-        }catch(error){
-            console.log({error},'...error while initating cart')
-        }
-    }
     const handleSignUp = async (input) => {
         try {
-            const response = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/user', {
+            const response = await axios.post(`${global.config.url}auth/sign-up`, {
                 name: input.name,
                 email: input.email,
                 password: input.password
             })
-            setUser(response.data.savedUser)
-            setToken("abcdefghi")
-            setupAuthHeaderForServiceCalls("abcdefghi")
-            initiateWish(response.data.savedUser._id)
-            initiateCart(response.data.savedUser._id)
-            navigate('/')
-            localStorage.setItem('login', JSON.stringify({token:"abcdefghi", _id:response.data.savedUser._id}))
+            if (response.status === 201) {
+                navigate('/login-register/login')
+            }
         } catch (error) {
-            setError(error.response)
+            console.log("Something went wrong in sign-up", error.response)
         }
     }
+
     const handleLogin = async (input) => {
-        console.log("I am clicked")
-        try{
-            const response = await axios.post('https://geeky-basket-backend.theniteshnarang.repl.co/user/login', {
+        try {
+            const response = await axios.post(`${global.config.url}auth/login`, {
                 email: input.email,
                 password: input.password
             })
-            setUser(response.data.validUser)
-            setToken("abcdefghi")
-            setupAuthHeaderForServiceCalls("abcdefghi")
-            localStorage.setItem('login', JSON.stringify({token:"abcdefghi", _id:response.data.validUser._id}))
-            navigate('/')
-        }catch(error){
-            console.log({error})
-            setError(error.response)
+            if (response.status === 200) {
+                setToken(response.data.token)
+                setupAuthHeaderForServiceCalls(response.data.token)
+                localStorage.setItem('login', JSON.stringify({ token: response.data.token }))
+                navigate('/products')
+                getUser();
+                getCartData();
+                getWishData();
+            }
+        } catch (error) {
+            console.log("Credentials are incorrect, while login", error.response)
         }
     }
-    const handleLogout = () => {
+
+
+    const handleLogout = useCallback(() => {
         setupAuthHeaderForServiceCalls(null)
         setUser({})
         setToken(null)
         dataDispatch(clearData())
         localStorage.removeItem('login')
-    }
+    }, [dataDispatch])
+
+    useEffect(() => {
+        setupAuthHeaderForServiceCalls(token)
+    }, [token])
+
+    useEffect(() => {
+        getUser()
+    }, [])
+
+    useEffect(() => {
+        function setupAuthExceptionHandler() {
+            const UNAUTHORIZED = 401;
+            axios.interceptors.response.use(
+                (response) => response,
+                (error) => {
+                    console.log({ error })
+                    if (error?.response?.request?.status === UNAUTHORIZED) {
+                        console.log("Interceptor running")
+                        handleLogout()
+                        navigate("/login-register/login");
+                    }
+                    return Promise.reject(error);
+                }
+            );
+        }
+        setupAuthExceptionHandler()
+    }, [handleLogout, navigate])
+
     const authProviderValue = {
         handleSignUp,
         handleLogin,
         handleLogout,
         token,
-        error,
-        user,
-        setUser
+        user
     }
+
     return (
         <AuthContext.Provider value={authProviderValue}>
             {children}
@@ -111,4 +122,4 @@ const useAuth = () => {
 }
 
 
-export {AuthProvider, useAuth}
+export { AuthProvider, useAuth }

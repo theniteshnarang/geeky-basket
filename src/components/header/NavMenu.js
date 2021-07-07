@@ -5,7 +5,7 @@ import { useAuth } from '../../context/authProvider'
 import { getTotalQty } from '../../helpers/utils';
 export const NavMenu = () => {
     const { cartItems } = useData();
-    const { user, handleLogout } = useAuth()
+    const { user, handleLogout, token } = useAuth()
     return (
         <>
             <div className="header">
@@ -33,16 +33,16 @@ export const NavMenu = () => {
                         </ul>
                         <ul className="navigation__account flex flex--justify_around flex--align_center color-light flex flex--align_center">
                             <li><NavLink to="/login-register/login" className="color-light">Hello, {user?.name ? user.name : "Sign In"}</NavLink></li>
-                            {user?._id ?
+                            {token ?
                                 <li>
                                     <button onClick={handleLogout} className="btn btn-secondary btn-sm">logout</button>
                                 </li>
                                 :
                                 <li>
                                     <img className="avatar"
-                                    src="https://images.unsplash.com/photo-1526653054275-5a4f37ea1c64?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                        src="https://images.unsplash.com/photo-1526653054275-5a4f37ea1c64?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
 
-                                    alt="avatar-img" />
+                                        alt="avatar-img" />
                                 </li>
                             }
                         </ul>

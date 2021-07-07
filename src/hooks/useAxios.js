@@ -1,8 +1,6 @@
-import { useState, useEffect} from 'react';
-import {useAuth} from './context/authProvider'
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 const useAxios = (requestType, url, postObject) => {
-    const {token} = useAuth()
     const [data, setData] = useState({ data: null, error: false, loading: false, status: 0 })
     useEffect(() => {
         (async () => {
@@ -11,8 +9,7 @@ const useAxios = (requestType, url, postObject) => {
                 const response = await axios({
                     method: requestType,
                     url,
-                    data: postObject,
-                    headers : {Authorization : token}
+                    data: postObject
                 })
                 setData((prev) => ({ ...prev, data: response.data, status: response.status }))
             } catch (err) {
@@ -21,7 +18,8 @@ const useAxios = (requestType, url, postObject) => {
                 setData((prev) => ({ ...prev, loading: false }))
             }
         })()
-    }, [url, requestType, postObject, token])
+
+    }, [url, requestType, postObject])
     return data
 }
 

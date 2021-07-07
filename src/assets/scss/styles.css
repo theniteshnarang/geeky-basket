@@ -127,6 +127,7 @@ body {
   background-color: var(--primary-color);
   border-bottom: 0;
   font-weight: 500;
+  height: 3.7rem;
 }
 
 .header__wrapper {
@@ -185,7 +186,7 @@ body {
 }
 
 .Shop-top {
-  min-height: 7.5vh;
+  min-height: 2.8rem;
   text-align: left;
   margin: 0.4rem 1.5rem 0 0.5rem;
   -ms-grid-row: 1;

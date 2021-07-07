@@ -3,7 +3,7 @@
     grid-template-columns: 1fr 4.5fr;
     grid-template-areas: "search top" "sidebar main";
     &-top {
-        min-height: 7.5vh;
+        min-height: 2.8rem;
         text-align: left;
         margin: 0.4rem 1.5rem 0 0.5rem;
         grid-area: top;
