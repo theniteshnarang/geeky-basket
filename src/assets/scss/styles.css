@@ -153,7 +153,7 @@ body {
   font-weight: 600;
 }
 
-.header__brand__title strong {
+.header__brand__title span {
   font-size: 1.5rem;
 }
 
@@ -430,5 +430,14 @@ body {
 
 .input-container {
   min-width: 100%;
+}
+
+.input-error {
+  margin-top: 0.5rem;
+}
+
+.disabled-btn {
+  cursor: not-allowed !important;
+  background-color: var(--gray-500);
 }
 /*# sourceMappingURL=styles.css.map */

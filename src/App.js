@@ -2,7 +2,6 @@ import { NavMenu } from './components/header/NavMenu';
 import Home from './pages/home/Home'
 import Shop from './pages/shop/Shop';
 import { NotFound } from './pages/NotFound'
-import { LoginRegister } from './pages/account/LoginRegister'
 import { Wishlist } from './pages/wishlist/Wishlist';
 import { Cart } from './pages/cart/Cart'
 import { Login } from './pages/account/Login'
@@ -28,7 +27,7 @@ function App() {
   }, [productsData, categoryData, storeDispatch])
 
   function PrivateRoute({ token, ...props }) {
-    return token ? <Route {...props} /> : <Navigate to="/login-register/login" replace={true} />
+    return token ? <Route {...props} /> : <Navigate to="/login" replace={true} />
   }
 
 
@@ -41,10 +40,8 @@ function App() {
           <Route path="/products" element={<Shop loading={productsLoading} />} />
           <PrivateRoute token={token} path="/cart" element={<Cart />} />
           <PrivateRoute token={token} path="/wishlist" element={<Wishlist />} />
-          <Route path="login-register" element={<LoginRegister />}>
-            <Route path="login" element={<Login />} />
-            <Route path="sign-up" element={<SignUp />} />
-          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

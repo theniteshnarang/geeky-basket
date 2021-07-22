@@ -13,7 +13,7 @@ export const NavMenu = () => {
                     <NavLink to="/" className="header__brand flex flex--align_center">
                         {/* <img src={logo} alt="" /> */}
                         {/* <img className="header__brand__logo" src={process.env.PUBLIC_URL + "/assets/img/logo.svg"} alt="logo" /> */}
-                        <span className="header__brand__title ">Geeky Basket</span>
+                        <span className="header__brand__title ">Geeky<span className="color-secondary">Basket</span></span>
                     </NavLink>
                     <nav className="navigation header__nav flex flex--justify_between flex--align_center">
                         <ul className="nav header__list flex flex--justify_between flex--align_center">
@@ -32,7 +32,7 @@ export const NavMenu = () => {
 
                         </ul>
                         <ul className="navigation__account flex flex--justify_around flex--align_center color-light flex flex--align_center">
-                            <li><NavLink to="/login-register/login" className="color-light">Hello, {user?.name ? user.name : "Sign In"}</NavLink></li>
+                            <li><NavLink to="/login" className="color-light">Hello, {user?.name ? user.name : "Sign In"}</NavLink></li>
                             {token ?
                                 <li>
                                     <button onClick={handleLogout} className="btn btn-secondary btn-sm">logout</button>

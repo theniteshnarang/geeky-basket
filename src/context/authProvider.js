@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
                 password: input.password
             })
             if (response.status === 201) {
-                navigate('/login-register/login')
+                navigate('/login')
             }
         } catch (error) {
             console.log("Something went wrong in sign-up", error.response)
@@ -93,7 +93,7 @@ const AuthProvider = ({ children }) => {
                     if (error?.response?.request?.status === UNAUTHORIZED) {
                         console.log("Interceptor running")
                         handleLogout()
-                        navigate("/login-register/login");
+                        navigate("/login");
                     }
                     return Promise.reject(error);
                 }
