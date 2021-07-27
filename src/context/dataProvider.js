@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { dataReducer } from './reducers/dataReducer'
 import axios from 'axios'
 import { fetchCartData, fetchWishData } from '../context/actions/dataActions'
@@ -38,10 +38,6 @@ const DataProvider = ({ children }) => {
         dataDispatch
     }
 
-    useEffect(() => {
-        getCartData()
-        getWishData()
-    }, [])
     return (
         <DataContext.Provider value={dataContextValue}>
             {children}

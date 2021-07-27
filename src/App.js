@@ -12,10 +12,12 @@ import { useEffect } from 'react';
 import { useStore } from './context/storeProvider';
 import { fetchProducts, fetchCategory } from './context/actions/storeActions';
 import { useAxios } from './hooks/useAxios';
-
+import { useData } from './context/dataProvider'
+import { setupAuthHeaderForServiceCalls } from './context/utils'
 function App() {
   const { storeDispatch } = useStore();
-  const { token } = useAuth()
+  const { token, getUser } = useAuth()
+  const { getCartData, getWishData } = useData()
   const { loading: productsLoading, data: productsData } = useAxios('get', `${global.config.url}product`)
   const { loading: categoryLoading, data: categoryData } = useAxios('get', `${global.config.url}category`)
 
@@ -29,6 +31,16 @@ function App() {
   function PrivateRoute({ token, ...props }) {
     return token ? <Route {...props} /> : <Navigate to="/login" replace={true} />
   }
+
+  useEffect(() => {
+    setupAuthHeaderForServiceCalls(token)
+    if (token) {
+      getCartData()
+      getWishData()
+      getUser()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token])
 
 
   return (

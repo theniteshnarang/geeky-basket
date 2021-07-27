@@ -3,22 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { clearData } from './actions/dataActions';
 import { useData } from './dataProvider';
-
+import { setupAuthHeaderForServiceCalls } from './utils'
 const AuthContext = createContext()
 
-function setupAuthHeaderForServiceCalls(token) {
-    if (token) {
-        return (axios.defaults.headers.common["Authorization"] = token);
-    }
-    delete axios.defaults.headers.common["Authorization"];
-}
 
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [token, setToken] = useState(JSON.parse(localStorage.getItem('login'))?.['token'])
     const navigate = useNavigate()
-    const { dataDispatch, getCartData, getWishData } = useData()
+    const { dataDispatch } = useData()
 
     const getUser = async () => {
         try {
@@ -57,9 +51,9 @@ const AuthProvider = ({ children }) => {
                 setupAuthHeaderForServiceCalls(response.data.token)
                 localStorage.setItem('login', JSON.stringify({ token: response.data.token }))
                 navigate('/products')
-                getUser();
-                getCartData();
-                getWishData();
+                // getUser();
+                // getCartData();
+                // getWishData();
             }
         } catch (error) {
             console.log("Credentials are incorrect, while login", error.response)
@@ -74,14 +68,6 @@ const AuthProvider = ({ children }) => {
         dataDispatch(clearData())
         localStorage.removeItem('login')
     }, [dataDispatch])
-
-    useEffect(() => {
-        setupAuthHeaderForServiceCalls(token)
-    }, [token])
-
-    useEffect(() => {
-        getUser()
-    }, [])
 
     useEffect(() => {
         function setupAuthExceptionHandler() {
@@ -106,6 +92,7 @@ const AuthProvider = ({ children }) => {
         handleSignUp,
         handleLogin,
         handleLogout,
+        getUser,
         token,
         user
     }
