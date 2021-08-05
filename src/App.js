@@ -57,6 +57,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      {/* <MobileNavMenu /> */}
     </div>
   );
 }

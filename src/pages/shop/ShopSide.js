@@ -1,14 +1,14 @@
 import { useStore } from '../../context/storeProvider'
-import { toggleInventory, toggleDelivery, filterGenre} from '../../context/actions/storeActions'
-const FilterCard = ({_id:genreId,name}) => {
-    const {storeDispatch, genreItems}=useStore()
+import { toggleInventory, toggleDelivery, filterGenre } from '../../context/actions/storeActions'
+const FilterCard = ({ _id: genreId, name }) => {
+    const { storeDispatch, genreItems } = useStore()
     return (
         <div key={genreId} className="flex flex--align_center mtb-1">
             <input
                 type="checkbox"
                 name="fiters"
                 checked={genreItems.includes(name)}
-                onChange={() => storeDispatch(filterGenre({name}))}
+                onChange={() => storeDispatch(filterGenre({ name }))}
             />
             <label>
                 {name}
@@ -32,7 +32,7 @@ export const ShopSide = () => {
                         />
                         <label>
                             Include Out of Stock
-                    </label>
+                        </label>
                     </div>
                     <div className="flex flex--align_center">
                         <input
@@ -43,12 +43,12 @@ export const ShopSide = () => {
                         />
                         <label>
                             Fast Delivery Only
-                    </label>
+                        </label>
                     </div>
                 </div>
                 <div className="mt-1">
                     <span className="Shop-side--title">By Genre</span>
-                    {category && category.map(item => <FilterCard key={item._id} {...item}/>)}
+                    {category && category.map(item => <FilterCard key={item._id} {...item} />)}
                 </div>
             </div>
 

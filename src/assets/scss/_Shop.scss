@@ -2,11 +2,19 @@
     display: grid;
     grid-template-columns: 1fr 4.5fr;
     grid-template-areas: "search top" "sidebar main";
+    @include tablet{
+        grid-template-columns: 1fr;
+        grid-template-areas: "top" "main" "sidebar";
+    }
     &-top {
         min-height: 2.8rem;
         text-align: left;
         margin: 0.4rem 1.5rem 0 0.5rem;
         grid-area: top;
+        @include phone{
+            margin-right: 0rem;
+            font-size: 0.7rem;
+        }
         &--sort {
             min-height: inherit;
             border: 2px solid var(--primary-color);
@@ -24,14 +32,23 @@
     }
     &-content {
         font-size: 0.9rem;
+        @include phone{
+            font-size: 0.8rem;
+        }
         &__price {
             font-size: 1rem;
+            @include phone{
+                font-size: 0.7rem;
+            }
         }
     }
     &-card {
         max-width: 38vw;
         @include bigtab {
             min-width: 100%;
+        }
+        @include phone{
+            height: 15rem;
         }
     }
     &-search {
@@ -83,4 +100,7 @@
 .badge {
     padding: 0.3rem 0.5rem;
     font-size: 1rem;
+    @include phone{
+        font-size: 0.8rem;
+    }
 }

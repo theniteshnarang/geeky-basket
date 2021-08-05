@@ -50,6 +50,9 @@ body {
     &__icon {
         top: 0.4rem;
     }
+    @include tablet{
+        display: none;
+    }
 }
 
 .avatar {

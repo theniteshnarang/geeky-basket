@@ -11,29 +11,32 @@ export const CartCard = ({ _id: cartId, product, qty }) => {
     const moveToWishText = (cartLoad) => cartLoad ? "Loading..." : "Move To Wishlist";
 
     return (
-        <div key={cartId} className="card Cart-card flex flex--justify_around pr-1 m-1">
+        <div key={cartId} className="card Cart-card flex flex--justify_around">
             <div className="card__header flex flex--justify_center">
                 <img className="card__image" src={image} alt="" />
             </div>
             <div className="card__content flex flex--column flex--justify_around">
-                <h3>{name}</h3>
-                <p>{desc}</p>
-                <strong>Price: ₹{parseInt(price.mrp)}</strong>
-                <div className="flex flex--align_center flex--justify_around">
-                    <span>Quantity:</span>
-                    <button
-                        disabled={cartLoad}
-                        onClick={() => increaseQuantity({ productId, qty, setCartLoad })}
-                        className={`btn btn-icon ${cartLoad && 'cursor-disable'}`}>
-                        <i className="bi bi-plus-circle"></i>
-                    </button>
-                    {qty}
-                    <button
-                        disabled={cartLoad}
-                        onClick={() => decreaseQuantity({ productId, qty, setCartLoad })}
-                        className={`btn btn-icon ${cartLoad && 'cursor-disable'}`}>
-                        <i className="bi bi-dash-circle"></i>
-                    </button>
+                <h3 className="card__content-title">{name}</h3>
+                <p className="card__content-desc">{desc}</p>
+                <strong className="card__content-price">Price: ₹{parseInt(price.mrp)}</strong>
+                <div className="Cart-cta">
+                    <div className="Cart-cta__qty">
+                        <span>Quantity: </span>
+                        <button
+                            disabled={cartLoad}
+                            onClick={() => increaseQuantity({ productId, qty, setCartLoad })}
+                            className={`btn btn-icon ${cartLoad && 'cursor-disable'}`}>
+                            <i className="bi bi-plus-circle"></i>
+                        </button>
+                        <span>{qty}</span>
+                        <button
+                            disabled={cartLoad}
+                            onClick={() => decreaseQuantity({ productId, qty, setCartLoad })}
+                            className={`btn btn-icon ${cartLoad && 'cursor-disable'}`}>
+                            <i className="bi bi-dash-circle"></i>
+                        </button>
+                    </div>
+
                     <button
                         disabled={cartLoad}
                         onClick={() => moveToWish({ product, setCartLoad, removeProduct })}

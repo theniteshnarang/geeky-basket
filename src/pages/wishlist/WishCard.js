@@ -27,7 +27,7 @@ export const WishCard = ({ _id: wishId, product }) => {
                 </div>
                 <p>{desc}</p>
                 <span>Price: {parseInt(price.mrp)}</span>
-                <div>
+                <div className="Wishlist-cta">
                     <button
                         disabled={loading}
                         onClick={() => moveToBasket({ product, cartItem, setLoading, handleRemove })}
@@ -37,7 +37,7 @@ export const WishCard = ({ _id: wishId, product }) => {
                     <button
                         disabled={loading}
                         onClick={() => handleRemove({ productId, setLoading })}
-                        className={`ml-1 btn btn-primary ${loading && 'cursor-disable'}`}>
+                        className={`btn btn-primary ${loading && 'cursor-disable'}`}>
                         Remove
                     </button>
                 </div>

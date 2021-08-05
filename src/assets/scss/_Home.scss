@@ -10,21 +10,48 @@
     border-bottom: 1px solid var(--gray-300);
     &__title {
         font-size: 1.7rem;
+        @include tablet{
+            font-size: 1.3rem;
+        }
+        @include phone{
+            font-size: 1rem;
+            margin-left: 0.5rem;
+        }
+    }
+    &__content{
+        flex-wrap: wrap;
+        gap: 1rem;
     }
     &-name {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        @include phone{
+            font-size: 0.8rem;
+        }
     }
     &-card {
         width: 17vw;
-        height: 52vh;
+        height: 45vh;
+        @include tablet{
+            width: 35vw;
+        }
+        @include phone{
+            width: 45vw;
+            height: 45vh;
+        }
+        @include smphone{
+            width: 60vw;
+        }
         &__header {
-            min-height: 32vh;
+            min-height: 27vh;
             border-bottom: 1px solid var(--gray-300);
         }
         &__content {
             margin: 0.5rem 0;
             font-size: 0.8rem;
-            min-height: 18vh;
+            min-height: 17vh;
+            @include phone{
+                min-height: 15vh;
+            }
         }
     }
     &__cta {
@@ -33,10 +60,16 @@
         right: 0;
     }
     &-price {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        @include phone{
+            font-size: 0.9rem;
+        }
     }
     &-container {
         width: 80%;
         margin: 1rem auto;
+        @include tablet{
+            width: 95%;
+        }
     }
 }

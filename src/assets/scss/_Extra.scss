@@ -10,6 +10,15 @@
         height: 60%;
         width: 30%;
         transform: translateY(-15%);
+        @include tablet{
+            width: 55%;
+        }
+        @include phone{
+            width: 65%;
+        }
+        @include smphone{
+            width: 75%;
+        }
     }
     &-badge {
         width: 90%;
@@ -34,6 +43,15 @@
     transform: translateY(100%);
     font-size: 2rem;
     height: 7vh;
+    @include tablet{
+        width: 55%;
+    }
+    @include phone{
+        width: 65%;
+    }
+    @include smphone{
+        width: 75%;
+    }
     &-item {
         transform: translateY(-15%);
     }
@@ -50,4 +68,9 @@
 .disabled-btn {
     cursor: not-allowed !important;
     background-color: var(--gray-500);
+}
+
+.menu-icon{
+    font-size: 1.2rem;
+    transform: translateY(0.2rem);
 }

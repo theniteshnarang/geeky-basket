@@ -52,6 +52,12 @@ body {
   top: 0.4rem;
 }
 
+@media only screen and (max-width: 750px) {
+  .search-bar {
+    display: none;
+  }
+}
+
 .avatar {
   width: 2.5rem;
   height: 2.5rem;
@@ -88,24 +94,74 @@ body {
   font-size: 1.7rem;
 }
 
+@media only screen and (max-width: 750px) {
+  .Category__title {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Category__title {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+  }
+}
+
+.Category__content {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .Category-name {
-  font-size: 1rem;
+  font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .Category-name {
+    font-size: 0.8rem;
+  }
 }
 
 .Category-card {
   width: 17vw;
-  height: 52vh;
+  height: 45vh;
+}
+
+@media only screen and (max-width: 750px) {
+  .Category-card {
+    width: 35vw;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Category-card {
+    width: 45vw;
+    height: 45vh;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .Category-card {
+    width: 60vw;
+  }
 }
 
 .Category-card__header {
-  min-height: 32vh;
+  min-height: 27vh;
   border-bottom: 1px solid var(--gray-300);
 }
 
 .Category-card__content {
   margin: 0.5rem 0;
   font-size: 0.8rem;
-  min-height: 18vh;
+  min-height: 17vh;
+}
+
+@media only screen and (max-width: 500px) {
+  .Category-card__content {
+    min-height: 15vh;
+  }
 }
 
 .Category__cta {
@@ -115,12 +171,24 @@ body {
 }
 
 .Category-price {
-  font-size: 1.1rem;
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .Category-price {
+    font-size: 0.9rem;
+  }
 }
 
 .Category-container {
   width: 80%;
   margin: 1rem auto;
+}
+
+@media only screen and (max-width: 750px) {
+  .Category-container {
+    width: 95%;
+  }
 }
 
 .header {
@@ -130,8 +198,20 @@ body {
   height: 3.7rem;
 }
 
+@media only screen and (max-width: 500px) {
+  .header {
+    font-size: 0.7rem;
+  }
+}
+
 .header__wrapper {
   max-width: 90vw;
+}
+
+@media only screen and (max-width: 500px) {
+  .header__wrapper {
+    max-width: 97vw;
+  }
 }
 
 .header__nav {
@@ -140,6 +220,18 @@ body {
 
 .header__list {
   min-width: 19vw;
+}
+
+@media only screen and (max-width: 750px) {
+  .header__list {
+    min-width: 32vw;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .header__list {
+    display: none;
+  }
 }
 
 .header__list__item:focus {
@@ -157,10 +249,22 @@ body {
   font-size: 1.5rem;
 }
 
+@media only screen and (max-width: 500px) {
+  .header__brand__title span {
+    font-size: 1rem;
+  }
+}
+
 .nav-cart__counter {
   position: absolute;
-  top: -2vh;
-  right: 0.4vw;
+  top: -0.7rem;
+  right: 0.4rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .nav-cart__counter {
+    right: 44vw;
+  }
 }
 
 .nav-cart__basket {
@@ -177,12 +281,57 @@ body {
   width: 14vw;
 }
 
+@media only screen and (max-width: 500px) {
+  .navigation__account {
+    width: 37vw;
+  }
+}
+
+.MobNavMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .MobNavMenu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.MobNavMenu__list {
+  min-width: 99%;
+  color: var(--light-color);
+}
+
+.MobNavMenu__item:hover {
+  background-color: var(--primary-color) !important;
+}
+
+.hide-desktop {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .hide-desktop {
+    display: block;
+  }
+}
+
 .Shop {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 4.5fr;
       grid-template-columns: 1fr 4.5fr;
       grid-template-areas: "search top" "sidebar main";
+}
+
+@media only screen and (max-width: 750px) {
+  .Shop {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "top" "main" "sidebar";
+  }
 }
 
 .Shop-top {
@@ -192,6 +341,13 @@ body {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: top;
+}
+
+@media only screen and (max-width: 500px) {
+  .Shop-top {
+    margin-right: 0rem;
+    font-size: 0.7rem;
+  }
 }
 
 .Shop-top--sort {
@@ -215,8 +371,20 @@ body {
   font-size: 0.9rem;
 }
 
+@media only screen and (max-width: 500px) {
+  .Shop-content {
+    font-size: 0.8rem;
+  }
+}
+
 .Shop-content__price {
   font-size: 1rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .Shop-content__price {
+    font-size: 0.7rem;
+  }
 }
 
 .Shop-card {
@@ -226,6 +394,12 @@ body {
 @media only screen and (max-width: 1250px) {
   .Shop-card {
     min-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Shop-card {
+    height: 15rem;
   }
 }
 
@@ -296,9 +470,30 @@ body {
   font-size: 1rem;
 }
 
+@media only screen and (max-width: 500px) {
+  .badge {
+    font-size: 0.8rem;
+  }
+}
+
 .Cart {
   max-width: 90vw;
   margin-left: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+@media only screen and (max-width: 500px) {
+  .Cart {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    max-width: 99vw;
+  }
 }
 
 .Cart-title {
@@ -306,10 +501,65 @@ body {
   font-size: 2rem;
   -ms-flex-item-align: start;
       align-self: flex-start;
+  margin: 1rem 0 0 3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .Cart-title {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.Cart-cta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 1rem;
+          column-gap: 1rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .Cart-cta {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+    row-gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+.Cart-cta__qty {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Cart-cta__qty span {
+  margin-right: 0.5rem;
 }
 
 .Cart-card {
   max-width: 100%;
+  margin-right: 1rem;
+  padding-right: 0.3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .Cart-card {
+    margin-right: 0.5rem;
+  }
 }
 
 .Cart-card .card__header {
@@ -318,6 +568,12 @@ body {
 
 .Cart-card .card__content {
   max-width: 75%;
+}
+
+@media only screen and (max-width: 500px) {
+  .Cart-card .card__content-title, .Cart-card .card__content-desc, .Cart-card .card__content-price {
+    font-size: 0.9rem;
+  }
 }
 
 .Cart-card .badge {
@@ -337,10 +593,41 @@ body {
   margin-bottom: 0.8rem;
 }
 
+@media only screen and (max-width: 500px) {
+  .Wishlist-card {
+    min-width: 99vw;
+  }
+}
+
 .Wishlist-title {
   font-weight: bold;
   -ms-flex-item-align: start;
       align-self: flex-start;
+  margin: 1rem 0 0 3rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .Wishlist-title {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.Wishlist-cta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .Wishlist-cta {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 .Checkout {
@@ -395,6 +682,27 @@ body {
           transform: translateY(-15%);
 }
 
+@media only screen and (max-width: 750px) {
+  .SignUp-card,
+  .Login-card {
+    width: 55%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .SignUp-card,
+  .Login-card {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .SignUp-card,
+  .Login-card {
+    width: 75%;
+  }
+}
+
 .SignUp-badge,
 .Login-badge {
   width: 90%;
@@ -423,6 +731,24 @@ body {
   height: 7vh;
 }
 
+@media only screen and (max-width: 750px) {
+  .NavLogin {
+    width: 55%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .NavLogin {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .NavLogin {
+    width: 75%;
+  }
+}
+
 .NavLogin-item {
   -webkit-transform: translateY(-15%);
           transform: translateY(-15%);
@@ -439,5 +765,11 @@ body {
 .disabled-btn {
   cursor: not-allowed !important;
   background-color: var(--gray-500);
+}
+
+.menu-icon {
+  font-size: 1.2rem;
+  -webkit-transform: translateY(0.2rem);
+          transform: translateY(0.2rem);
 }
 /*# sourceMappingURL=styles.css.map */

@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useStore } from '../../context/storeProvider'
-import {useEffect} from 'react'
-import  {filterGenre, clearGenre} from '../../context/actions/storeActions'
-const CategoryCard = ({_id:productId, name,image,desc, price}) => {
+import { useEffect } from 'react'
+import { filterGenre, clearGenre } from '../../context/actions/storeActions'
+const CategoryCard = ({ _id: productId, name, image, desc, price }) => {
     return (
         <div key={productId} className="Category-card card card--col flex flex--column">
             <div className="Category-card__header card__header--col pos-rel flex flex--column">
-                <img className="card__image" src={image[0]} alt="book cover"/>
+                <img className="card__image" src={image[0]} alt="book cover" />
                 {/* <i className="card__icon card__icon--col bi bi-heart-fill color-primary"></i> */}
             </div>
             <div className="Category-card__content card__content--col flex flex--column flex--justify_around">
@@ -19,15 +19,15 @@ const CategoryCard = ({_id:productId, name,image,desc, price}) => {
 }
 
 const Category = ({ name, _id: categId, products }) => {
-    const {storeDispatch} = useStore()
+    const { storeDispatch } = useStore()
     return (
         <div className="Category pb-1">
             <h3 className="Category__title mtb-1">{name}</h3>
             <div className="Category__content flex flex--justify_around">
-                {products.slice(0,4).map(item => <CategoryCard key={item._id} {...item}/>)}
+                {products.slice(0, 4).map(item => <CategoryCard key={item._id} {...item} />)}
             </div>
             <Link to="/products">
-                <button className="Category__cta btn btn-primary" onClick={()=> storeDispatch(filterGenre({name}))}>Show More</button>
+                <button className="Category__cta btn btn-primary" onClick={() => storeDispatch(filterGenre({ name }))}>Show More</button>
             </Link>
         </div>
     )

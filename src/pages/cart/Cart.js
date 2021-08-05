@@ -8,8 +8,8 @@ export const Cart = () => {
 
     return (
         <div className="Cart-wrapper flex flex--column flex--align_center">
-            <h1 className="Cart-title ml-3 mt-1 Cart-title">Cart</h1>
-            <div className="Cart flex flex--justify_around">
+            <h1 className="Cart-title Cart-title">Cart</h1>
+            <div className="Cart">
                 <div className="Cart-items">
                     {
                         cartItems.length > 0 ? cartItems.map(item => <CartCard key={item._id} {...item} />) : <EmptyPage label="Cart" />

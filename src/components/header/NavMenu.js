@@ -1,11 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { useData } from '../../context/dataProvider';
 import { useAuth } from '../../context/authProvider'
-// import logo from '../../assets/logo/gblogo.svg';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import { getTotalQty } from '../../helpers/utils';
+import { useState } from 'react'
 export const NavMenu = () => {
     const { cartItems } = useData();
     const { user, handleLogout, token } = useAuth()
+    const [showNavMenu, setShowNavMenu] = useState(false)
     return (
         <>
             <div className="header">
@@ -31,8 +33,9 @@ export const NavMenu = () => {
                             </NavLink></li>
 
                         </ul>
-                        <ul className="navigation__account flex flex--justify_around flex--align_center color-light flex flex--align_center">
-                            <li><NavLink to="/login" className="color-light">Hello, {user?.name ? user.name : "Sign In"}</NavLink></li>
+
+                        <ul className="navigation__account flex flex--justify_around flex--align_center color-light">
+                            <li><NavLink to="/login" className="color-light">{user?.name ? user.name : "Sign In"}</NavLink></li>
                             {token ?
                                 <li>
                                     <button onClick={handleLogout} className="btn btn-secondary btn-sm">logout</button>
@@ -46,8 +49,29 @@ export const NavMenu = () => {
                                 </li>
                             }
                         </ul>
+                        <button className="btn bg-primary btn-sm hide-desktop color-light" onClick={() => setShowNavMenu(show => !showNavMenu)}>
+                            {showNavMenu ? <AiOutlineClose className="menu-icon" /> : <AiOutlineMenu className="menu-icon" />}
+                        </button>
                     </nav>
+
                 </div>
+                {showNavMenu && (
+                    <nav className="MobNavMenu bg-primary">
+                        <ul class="MobNavMenu__list list list-stacked flex flex--column">
+                            <li class="MobNavMenu__item list__item"><NavLink className="header__list__item" to="/" end>Home</NavLink></li>
+                            <li class="MobNavMenu__item list__item"><NavLink className="header__list__item" to="/products">Shop</NavLink></li>
+                            <li class="MobNavMenu__item list__item"><NavLink className="nav-cart header__list__item" to="/wishlist">
+                                <i className="bi bi-suit-heart-fill nav-cart__basket"></i>
+                            </NavLink></li>
+                            <li class="MobNavMenu__item list__item"><NavLink className="nav-cart header__list__item" to="/cart">
+                                <div className="nav-cart__item pos-rel">
+                                    <span className="nav-cart__counter color-secondary">{getTotalQty(cartItems)}</span>
+                                    <i className="bi bi-basket nav-cart__basket"></i>
+                                </div>
+                            </NavLink></li>
+                        </ul>
+                    </nav>
+                )}
             </div>
         </>)
 }

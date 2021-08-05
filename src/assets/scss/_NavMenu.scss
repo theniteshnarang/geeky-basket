@@ -3,14 +3,26 @@
     border-bottom: 0;
     font-weight: 500;
     height: 3.7rem;
+    @include phone{
+        font-size: 0.7rem;
+    }
     &__wrapper {
         max-width: 90vw;
+        @include phone{
+            max-width: 97vw;
+        }
     }
     &__nav {
         width: 55vw;
     }
     &__list {
         min-width: 19vw;
+        @include tablet {
+            min-width: 32vw;
+        }
+        @include phone{
+            display: none;
+        }
         &__item {
             &:focus {
                 border: none;
@@ -24,16 +36,23 @@
         font-weight: 600;
         span {
             font-size: 1.5rem;
+            @include phone{
+                font-size: 1rem;
+            }
         }
     }
 }
 
 .nav {
+    
     &-cart {
         &__counter {
             position: absolute;
-            top: -2vh;
-            right: 0.4vw;
+            top: -0.7rem;
+            right: 0.4rem;
+            @include phone{
+                right: 44vw;
+            }
         }
         &__basket {
             font-size: 1.3rem;
@@ -47,5 +66,31 @@
 .navigation {
     &__account {
         width: 14vw;
+        @include phone {
+            width: 37vw;
+        }
+    }
+}
+
+.MobNavMenu{
+    display: none;
+    @include phone{
+        display: flex;
+    }
+    &__list{
+        min-width: 99%;
+        color: var(--light-color);
+    }
+    &__item{
+        &:hover{
+            background-color: var(--primary-color) !important;
+        }
+    }
+}
+
+.hide-desktop {
+    display: none;
+    @include phone{
+        display: block;
     }
 }
