@@ -69,7 +69,7 @@ const AuthProvider = ({ children }) => {
         dataDispatch(clearData())
         addToast("Logout Successfully", { appearance: 'success' })
         localStorage.removeItem('login')
-    }, [dataDispatch])
+    }, [dataDispatch, addToast])
 
     useEffect(() => {
         function setupAuthExceptionHandler() {
