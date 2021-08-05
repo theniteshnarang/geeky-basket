@@ -28,7 +28,7 @@ export const CartCard = ({ _id: cartId, product, qty }) => {
                             className={`btn btn-icon ${cartLoad && 'cursor-disable'}`}>
                             <i className="bi bi-plus-circle"></i>
                         </button>
-                        <span>{qty}</span>
+                        <span>&nbsp;{qty}</span>
                         <button
                             disabled={cartLoad}
                             onClick={() => decreaseQuantity({ productId, qty, setCartLoad })}

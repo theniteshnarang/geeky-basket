@@ -44,6 +44,11 @@
     }
     &-card {
         max-width: 38vw;
+        &__header{
+            @include phone{
+                align-self: center;
+            }
+        }
         @include bigtab {
             min-width: 100%;
         }

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { clearData } from './actions/dataActions';
 import { useData } from './dataProvider';
 import { setupAuthHeaderForServiceCalls } from './utils'
+import { useToasts } from 'react-toast-notifications';
 const AuthContext = createContext()
 
 
@@ -12,8 +13,8 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [token, setToken] = useState(JSON.parse(localStorage.getItem('login'))?.['token'])
     const navigate = useNavigate()
+    const { addToast } = useToasts();
     const { dataDispatch } = useData()
-
     const getUser = async () => {
         try {
             const response = await axios.get(`${global.config.url}user/u`)
@@ -34,6 +35,7 @@ const AuthProvider = ({ children }) => {
             })
             if (response.status === 201) {
                 navigate('/login')
+                addToast("Signup Successfully, please Login", { appearance: 'success' })
             }
         } catch (error) {
             console.log("Something went wrong in sign-up", error.response)
@@ -50,10 +52,9 @@ const AuthProvider = ({ children }) => {
                 setToken(response.data.token)
                 setupAuthHeaderForServiceCalls(response.data.token)
                 localStorage.setItem('login', JSON.stringify({ token: response.data.token }))
+                console.log(addToast, '....')
+                addToast("Login Successfully", { appearance: 'success' })
                 navigate('/products')
-                // getUser();
-                // getCartData();
-                // getWishData();
             }
         } catch (error) {
             console.log("Credentials are incorrect, while login", error.response)
@@ -66,6 +67,7 @@ const AuthProvider = ({ children }) => {
         setUser({})
         setToken(null)
         dataDispatch(clearData())
+        addToast("Logout Successfully", { appearance: 'success' })
         localStorage.removeItem('login')
     }, [dataDispatch])
 

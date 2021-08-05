@@ -11,15 +11,15 @@ import './assets/scss/styles.css';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <StoreProvider>
-        <DataProvider>
-          <AuthProvider>
-            <ToastProvider placement="bottom-left" autoDismiss={true} autoDismissTimeout={1500}>
+      <ToastProvider placement="bottom-right" autoDismiss={true} autoDismissTimeout={1500}>
+        <StoreProvider>
+          <DataProvider>
+            <AuthProvider>
               <App />
-            </ToastProvider>
-          </AuthProvider>
-        </DataProvider>
-      </StoreProvider>
+            </AuthProvider>
+          </DataProvider>
+        </StoreProvider>
+      </ToastProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

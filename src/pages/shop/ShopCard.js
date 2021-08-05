@@ -32,7 +32,7 @@ export const ShopCard = ({ _id: productId, name, price, desc, image, stock_qty, 
 
     return (
         <div key={productId} className="Shop-card card flex flex--justify_around">
-            <div className="card__header flex flex--justify_center">
+            <div className="Shop-card__header card__header flex flex--justify_center">
                 <img className="card__image" src={image[0]} alt="" />
             </div>
             <div className="Shop-content card__content flex flex--column flex--justify_around">
