@@ -34,30 +34,6 @@ body {
   cursor: not-allowed !important;
 }
 
-.search-bar {
-  width: 17vw;
-  margin: 0.5rem;
-  margin-top: 1rem;
-  min-height: 5vh;
-  position: fixed;
-}
-
-.search-bar__input {
-  color: var(--primary-color);
-  font-size: 1rem;
-  border-width: 2px;
-}
-
-.search-bar__icon {
-  top: 0.4rem;
-}
-
-@media only screen and (max-width: 750px) {
-  .search-bar {
-    display: none;
-  }
-}
-
 .avatar {
   width: 2.5rem;
   height: 2.5rem;
@@ -330,7 +306,7 @@ body {
   .Shop {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-        grid-template-areas: "top" "main" "sidebar";
+        grid-template-areas: "search" "top" "sidebar" "main";
   }
 }
 
@@ -351,14 +327,12 @@ body {
 }
 
 .Shop-top--sort {
-  min-height: inherit;
-  border: 2px solid var(--primary-color);
-  border-radius: 0.3rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
 }
 
-.Shop-top--sort input {
-  margin-right: 0.5rem;
-  background-color: var(--secondary-color);
+.Shop-top--sort label {
+  font-weight: bold;
 }
 
 .Shop-top--btn {
@@ -443,12 +417,44 @@ body {
   padding: 0.7rem;
 }
 
+@media only screen and (max-width: 750px) {
+  .Shop-side--card {
+    position: static;
+    width: 99%;
+  }
+}
+
 .Shop-side--card input {
   margin-right: 0.5rem;
 }
 
 .Shop-side--title {
   text-align: left;
+}
+
+.search-bar {
+  width: 17vw;
+  margin: 0.5rem;
+  margin-top: 1rem;
+  min-height: 5vh;
+  position: fixed;
+}
+
+@media only screen and (max-width: 750px) {
+  .search-bar {
+    position: static;
+    min-width: 97%;
+  }
+}
+
+.search-bar__input {
+  color: var(--primary-color);
+  font-size: 1rem;
+  border-width: 2px;
+}
+
+.search-bar__icon {
+  top: 0.4rem;
 }
 
 .btn-icon {

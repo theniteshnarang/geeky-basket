@@ -4,7 +4,7 @@
     grid-template-areas: "search top" "sidebar main";
     @include tablet{
         grid-template-columns: 1fr;
-        grid-template-areas: "top" "main" "sidebar";
+        grid-template-areas: "search" "top" "sidebar" "main";
     }
     &-top {
         min-height: 2.8rem;
@@ -16,12 +16,10 @@
             font-size: 0.7rem;
         }
         &--sort {
-            min-height: inherit;
-            border: 2px solid var(--primary-color);
-            border-radius: 0.3rem;
-            input {
-                margin-right: 0.5rem;
-                background-color: var(--secondary-color);
+            margin-top: 1rem;
+            margin-right: 1rem;
+            label{
+                font-weight: bold;
             }
         }
         &--btn {
@@ -73,6 +71,10 @@
             position: fixed;
             width: 16.5vw;
             padding: 0.7rem;
+            @include tablet {
+                position: static;
+                width: 99%;
+            }
             input {
                 margin-right: 0.5rem;
             }
@@ -80,6 +82,26 @@
         &--title {
             text-align: left;
         }
+    }
+}
+
+.search-bar {
+    width: 17vw;
+    margin: 0.5rem;
+    margin-top: 1rem;
+    min-height: 5vh;
+    position: fixed;
+    @include tablet{
+        position: static;
+        min-width: 97%;
+    }
+    &__input {
+        color: var(--primary-color);
+        font-size: 1rem;
+        border-width: 2px;
+    }
+    &__icon {
+        top: 0.4rem;
     }
 }
 

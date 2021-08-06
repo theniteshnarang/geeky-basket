@@ -1,7 +1,7 @@
 import { useStore } from '../../context/storeProvider'
 import { ShopCard } from './ShopCard'
 import Loader from 'react-loader-spinner'
-export const ShopProducts = ({loading}) => {
+export const ShopProducts = ({ loading }) => {
     const { products, showInventory, showFastDelivery, sortBy, searchBy, genreItems } = useStore()
     const getSortedProducts = (data, sortBy) => {
         switch (sortBy) {
@@ -22,8 +22,8 @@ export const ShopProducts = ({loading}) => {
     }
 
     const handleGenre = (genre, genreItems) => {
-        for(let i=0; i<genre.length ; i++){
-            if(genreItems.includes(genre[i])){
+        for (let i = 0; i < genre.length; i++) {
+            if (genreItems.includes(genre[i])) {
                 return true
             }
         }
@@ -34,8 +34,8 @@ export const ShopProducts = ({loading}) => {
         return data
             .filter(item => showInventory === true ? item : item.stock_qty > 0)
             .filter(({ fastDelivery }) => showFastDelivery ? fastDelivery : true)
-            .filter(({ name }) => searchBy.length > 0 ? name.toLowerCase().startsWith(searchBy) : true)
-            .filter(({genre}) => genreItems.length > 0 ? handleGenre(genre, genreItems) : true)
+            .filter(({ name }) => searchBy.length > 0 ? name.toLowerCase().includes(searchBy.toLowerCase()) : true)
+            .filter(({ genre }) => genreItems.length > 0 ? handleGenre(genre, genreItems) : true)
     }
 
     const sortedProducts = getSortedProducts(products, sortBy)

@@ -6,51 +6,21 @@ export const ShopTop = () => {
         return storeDispatch(sortProducts(e.target.value))
     }
     return (
-        <div className="Shop-top">
-            <fieldset className="Shop-top--sort flex flex--justify_around flex--align_center">
-                <legend className="ml-3 plr-1">Sort By</legend>
-                <label>
-                    <input
-                        type="radio"
-                        name="sort"
-                        value="popularity"
-                        onChange={(e) => handleSort(e)}
-                        checked={sortBy === "popularity"}
-                    />
-                Popularity
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="sort"
-                        value="lowToHigh"
-                        onChange={(e) => handleSort(e)}
-                        checked={sortBy === "lowToHigh"}
-                    />
-                Price - Low to High
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="sort"
-                        value="highToLow"
-                        onChange={(e) => handleSort(e)}
-                        checked={sortBy === "highToLow"}
-                    />
-                Price - High to Low
-                </label>
-                <label>
-                    <input
-                        type="radio"
-                        name="sort"
-                        value="ratings"
-                        onChange={(e) => handleSort(e)}
-                        checked={sortBy === "ratings"}
-                    />
-                Average Reviews
-                </label>
-            </fieldset>
-
+        <div className="Shop-top flex flex--justify_end">
+            <div className="Shop-top--sort">
+                <label for="sortBy">Sort By: </label>
+                <select
+                    name="sortBy"
+                    id="sortBy"
+                    value={sortBy}
+                    onChange={(e) => handleSort(e)}
+                >
+                    <option value="popularity">Popularity</option>
+                    <option value="lowToHigh">Price: Low To High</option>
+                    <option value="highToLow">Price: High To Low</option>
+                    <option value="ratings">Average</option>
+                </select>
+            </div>
         </div>
     )
 }
