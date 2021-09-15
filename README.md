@@ -1,4 +1,4 @@
-# geeky-talks
+# geeky-basket
 
 ## Backend:
 - [Server-repl](https://replit.com/@theniteshnarang/geeky-basket-backend#index.js)
