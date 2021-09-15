@@ -1,14 +1,46 @@
-# Getting Started with Create React App
+# geeky-talks
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Backend:
+- [Server-repl](https://replit.com/@theniteshnarang/geeky-basket-backend#index.js)
+- [Code-github](https://github.com/theniteshnarang/geeky-basket-backend/tree/development)
 
-## Available Scripts
+## A E-Commerce Application For Geeky People
 
-In the project directory, you can run:
+- The purpose of designing and building this project is, to not end-up buying useless things which we don't want. It is focused towards one or two niche.
 
-### `npm start`
+## Highlight Features
+- Optimised Network Calls
+- Private And Protected Route
+- Fallback To Login For Unauthorized User.
+- Good User Experience
+- Robustness to User Interaction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Addtional Features
 
-The page will reload if you make edits.
+- Login/Sign-up
+- JWT Authentication
+- Data Persistance with REST-full API
+- Password saving using bcript and salt
+- Search Products
+- Mobile Responsive
+- Product Listing Page
+- Category Listing page
+- Add To Cart
+- Remove From Cart
+- Increase / Decrease Qty from Cart
+- Move to Wishlist from Cart
+- Add To Wishlist
+- Remove From Wishlist
+- Move to Cart from Wishlist
+- Form Validation using Formik
+
+## Tech Stack
+- React
+- Context API for Global State Management
+- Element Design for UI designing (My component library)
+- MongoDB for storing documents
+- Mongoose for interacting with MongoDB
+- Express for Network Calls and Middlewares
+
+
+
